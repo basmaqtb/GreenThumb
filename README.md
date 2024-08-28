@@ -1,7 +1,7 @@
-# NewJob
+# GreenThumb
 **Diagramme de classe:
 
-![Capture d'écran 2024-07-31 025202](https://github.com/user-attachments/assets/85f68463-b5a8-4001-80d3-3cbd091cd962)
+![Capture d'écran 2024-08-28 011158](https://github.com/user-attachments/assets/bd7ef4b4-388e-47a2-8165-b0f59a010aa1)
 
 
 **Diagramme de usecase:
