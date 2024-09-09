@@ -1,2 +1,19 @@
-package com.GreenThumb.DTO;public class EquipementDTO {
+package com.GreenThumb.DTO;
+
+import com.GreenThumb.Models.Enums.EtatEquipement;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class EquipementDTO {
+    private Long id;
+    private String type;
+    private String marque;
+    private String model;
+    private EtatEquipement etat;
 }
