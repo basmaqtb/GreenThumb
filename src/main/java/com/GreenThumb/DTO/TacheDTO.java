@@ -1,4 +1,4 @@
-package com.GreenThumb.Models;
+package com.GreenThumb.DTO;
 
 import com.GreenThumb.Models.Enums.EtatEquipement;
 import com.GreenThumb.Models.Enums.StatutRendezVous;

@@ -1,5 +1,6 @@
 package com.GreenThumb.Services;
 
+import com.GreenThumb.DTO.TacheDTO;
 import com.GreenThumb.Exceptions.ResourceNotFoundException;
 import com.GreenThumb.Exceptions.TacheNotFoundException;
 import com.GreenThumb.Mappers.TacheMapper;
@@ -7,7 +8,6 @@ import com.GreenThumb.Models.Enums.EtatEquipement;
 import com.GreenThumb.Models.Enums.StatutTache;
 import com.GreenThumb.Models.Equipement;
 import com.GreenThumb.Models.Tache;
-import com.GreenThumb.Models.TacheDTO;
 import com.GreenThumb.Repositories.EquipementRepository;
 import com.GreenThumb.Repositories.TacheRepository;
 import org.springframework.beans.factory.annotation.Autowired;

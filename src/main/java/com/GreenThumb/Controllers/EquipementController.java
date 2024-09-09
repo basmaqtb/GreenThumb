@@ -31,7 +31,7 @@ public class EquipementController {
         return ResponseEntity.ok(equipementMapper.toDto(equipements));
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<EquipementDTO> createEquipement(@RequestBody EquipementDTO equipementDTO) {
         var createdEquipement = equipementService.createEquipment(equipementDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(equipementMapper.toDto(createdEquipement));
@@ -45,7 +45,7 @@ public class EquipementController {
         return ResponseEntity.ok(equipementDTO);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<EquipementDTO> updateEquipement(@PathVariable Long id, @RequestBody EquipementDTO updatedEquipementDTO) {
         try {
             var updatedEquipement = equipementService.updateEquipement(id, updatedEquipementDTO);
@@ -56,7 +56,7 @@ public class EquipementController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteEquipement(@PathVariable Long id) {
         try {
             equipementService.deleteEquipment(id);
