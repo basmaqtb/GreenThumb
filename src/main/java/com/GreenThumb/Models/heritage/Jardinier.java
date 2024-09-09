@@ -11,7 +11,6 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Builder
 @Setter
 @Getter
 @Entity
@@ -20,8 +19,8 @@ public class Jardinier extends User{
     @OneToMany(mappedBy = "jardinier", cascade = CascadeType.ALL)
     private List<RendezVous> rendezVousList;
 
-    public Jardinier(Long id, String fullname, String email, String password, String phone, Role role , List<RendezVous> rendezVous) {
-        super(id, fullname, email, password, phone, role);
+    public Jardinier(Long id, String fullname, String email, String password, Role role , List<RendezVous> rendezVous) {
+        super(id, fullname, email, password, role);
         this.rendezVousList = rendezVous;
         this.setRole(Role.Jardinier);
 

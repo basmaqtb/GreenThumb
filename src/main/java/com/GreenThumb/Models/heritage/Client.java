@@ -11,7 +11,7 @@ import lombok.Setter;
 
 import java.util.List;
 
-@Builder
+
 @Setter
 @Getter
 @Entity
@@ -20,19 +20,20 @@ public class Client extends User {
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<RendezVous> rendezVousList;
 
-    public Client(Long id, String fullname, String email, String password, String phone, Role role, List<RendezVous> rendezVousList) {
-        super(id, fullname, email, password, phone, role);
+    public Client(Long id, String fullname, String email, String password, Role role, List<RendezVous> rendezVousList) {
+        super(id, fullname, email, password
+                , role);
         this.rendezVousList = rendezVousList;
-        this.setRole(Role.Client);
+        this.setRole(Role.USER);
     }
 
     public Client(List<RendezVous> rendezVousList) {
         this.rendezVousList = rendezVousList;
-        this.setRole(Role.Client);
+        this.setRole(Role.USER);
     }
 
     public Client() {
         super();
-        this.setRole(Role.Client);
+        this.setRole(Role.USER);
     }
 }

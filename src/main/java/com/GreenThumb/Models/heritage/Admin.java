@@ -9,8 +9,8 @@ import lombok.Setter;
 @Setter
 @Entity
 public class Admin extends User {
-    public Admin(Long id, String nom, String username, String password, String phone, Role role) {
-        super(id, nom, username, password, phone, role);
+    public Admin(Long id, String nom, String username, String password, Role role) {
+        super(id, nom, username, password, role);
         this.setRole(Role.ADMIN);
     }
 

@@ -9,6 +9,7 @@ import com.GreenThumb.Services.EquipementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,6 +33,7 @@ public class EquipementController {
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<EquipementDTO> createEquipement(@RequestBody EquipementDTO equipementDTO) {
         var createdEquipement = equipementService.createEquipment(equipementDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(equipementMapper.toDto(createdEquipement));
