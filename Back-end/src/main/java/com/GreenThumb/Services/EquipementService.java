@@ -1,10 +1,5 @@
 package com.GreenThumb.Services;
 
-import com.GreenThumb.DTO.EquipementDTO;
-import com.GreenThumb.Exceptions.EquipmentNotFoundException;
-import com.GreenThumb.Exceptions.ResourceNotFoundException;
-import com.GreenThumb.Mappers.EquipementMapper;
-import com.GreenThumb.Models.Enums.EtatEquipement;
 import com.GreenThumb.Models.Equipement;
 import com.GreenThumb.Repositories.EquipementRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,42 +13,40 @@ public class EquipementService {
 
     @Autowired
     private EquipementRepository equipementRepository;
-    @Autowired
-    private EquipementMapper equipmentMapper;
 
     // Method to create a new Equipement
-    public Equipement createEquipment(EquipementDTO equipementDTO) {
-        var equipment = equipmentMapper.toEntity(equipementDTO);
-        equipment.setEtat(EtatEquipement.Disponible);
-        return equipementRepository.save(equipment);
+    public Equipement create(Equipement equipement) {
+        return equipementRepository.save(equipement);
     }
 
-    public List<Equipement> getAllEquipments() {
-        var equipments = equipementRepository.findAll();
-        if (equipments.isEmpty()){
-            throw new EquipmentNotFoundException();
+    // Method to get all Equipements
+    public List<Equipement> getAll() {
+        return equipementRepository.findAll();
+    }
+
+    // Method to get Equipement by ID
+    public Optional<Equipement> getById(Long id) {
+        return equipementRepository.findById(id);
+    }
+
+    // Method to update an existing Equipement
+    public Equipement update(Long id, Equipement equipementDetails) {
+        Optional<Equipement> optionalEquipement = equipementRepository.findById(id);
+
+        if (optionalEquipement.isPresent()) {
+            Equipement equipement = optionalEquipement.get();
+            equipement.setType(equipementDetails.getType());
+            equipement.setMarque(equipementDetails.getMarque());
+            equipement.setModel(equipementDetails.getModel());
+            return equipementRepository.save(equipement);
+        } else {
+            return null; // Or handle this case as you see fit, such as returning a default object or throwing an exception.
         }
-        return equipments;    }
-
-    public Equipement getEquipmentById(Long id) {
-        return equipementRepository.findById(id).orElseThrow(EquipmentNotFoundException::new);
-    }
-
-    public Equipement updateEquipement(Long id, EquipementDTO equipementDTO) {
-        Equipement existingEquipement = equipementRepository.findById(id)
-                .orElseThrow(ResourceNotFoundException::new);
-
-        existingEquipement.setType(equipementDTO.getType());
-        existingEquipement.setMarque(equipementDTO.getMarque());
-        existingEquipement.setModel(equipementDTO.getModel());  // Include other fields as needed
-        existingEquipement.setEtat(equipementDTO.getEtat());    // Include other fields as needed
-
-        return equipementRepository.save(existingEquipement);
     }
 
 
-    public void deleteEquipment(Long id) {
-        var equipment = equipementRepository.findById(id).orElseThrow(EquipmentNotFoundException::new);
-        equipementRepository.delete(equipment);
+    // Method to delete an Equipement by ID
+    public void delete(Long id) {
+        equipementRepository.deleteById(id);
     }
 }

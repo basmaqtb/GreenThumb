@@ -2,8 +2,6 @@ package com.GreenThumb.Models;
 
 import com.GreenThumb.Models.Enums.EtatEquipement;
 import com.GreenThumb.Models.Enums.StatutRendezVous;
-import com.GreenThumb.Models.heritage.Client;
-import com.GreenThumb.Models.heritage.Jardinier;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,16 +25,5 @@ public class RendezVous {
 
     @Enumerated(EnumType.STRING)
     private StatutRendezVous statutRendezVous;
-
-    @ManyToOne
-    private Tache tache;
-
-    @ManyToOne
-    private Jardinier jardinier;
-
-    @ManyToOne
-    private Client client;
-
-
 
 }

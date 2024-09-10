@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -20,8 +18,5 @@ public class Stock {
     private String articles;
     private int quantite;
     private int alertSeuil;
-
-    @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL)
-    private List<Equipement> equipementList;
 
 }
