@@ -24,16 +24,16 @@ public class Client extends User {
         super(id, fullname, email, password
                 , role);
         this.rendezVousList = rendezVousList;
-        this.setRole(Role.USER);
+        this.setRole(Role.CLIENT);
     }
 
     public Client(List<RendezVous> rendezVousList) {
         this.rendezVousList = rendezVousList;
-        this.setRole(Role.USER);
+        this.setRole(Role.CLIENT);
     }
 
     public Client() {
         super();
-        this.setRole(Role.USER);
+        this.setRole(Role.CLIENT);
     }
 }

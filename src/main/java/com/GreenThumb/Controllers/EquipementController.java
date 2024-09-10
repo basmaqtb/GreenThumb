@@ -33,7 +33,6 @@ public class EquipementController {
     }
 
     @PostMapping("/add")
-    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<EquipementDTO> createEquipement(@RequestBody EquipementDTO equipementDTO) {
         var createdEquipement = equipementService.createEquipment(equipementDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(equipementMapper.toDto(createdEquipement));

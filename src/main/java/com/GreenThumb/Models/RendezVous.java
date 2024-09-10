@@ -25,6 +25,9 @@ public class RendezVous {
     private Date date;
     private Time heure;
 
+    @Enumerated(EnumType.STRING)
+    private StatutRendezVous statutRendezVous;
+
     @ManyToOne
     private Tache tache;
 
@@ -34,7 +37,6 @@ public class RendezVous {
     @ManyToOne
     private Client client;
 
-    @Enumerated(EnumType.STRING)
-    private StatutRendezVous statutRendezVous;
+
 
 }

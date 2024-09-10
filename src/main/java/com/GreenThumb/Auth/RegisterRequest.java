@@ -1,5 +1,6 @@
 package com.GreenThumb.Auth;
 
+import com.GreenThumb.Models.Enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,4 +17,7 @@ public class RegisterRequest {
     private String email;
 
     private String password;
+
+    private Role role;
+
 }

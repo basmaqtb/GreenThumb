@@ -24,6 +24,9 @@ public class Equipement {
     private String marque;
     private String model;
 
+    @Enumerated(EnumType.STRING)
+    private EtatEquipement etat;
+
     @OneToMany(mappedBy = "equipement", cascade = CascadeType.ALL)
     private List<Tache> tacheList;
 
@@ -31,6 +34,5 @@ public class Equipement {
     private Stock stock;
 
 
-    @Enumerated(EnumType.STRING)
-    private EtatEquipement etat;
+
 }

@@ -3,6 +3,7 @@ package com.GreenThumb.DTO;
 import com.GreenThumb.Models.Enums.EtatEquipement;
 import com.GreenThumb.Models.Enums.StatutRendezVous;
 import com.GreenThumb.Models.Enums.StatutTache;
+import com.GreenThumb.Models.Equipement;
 import com.GreenThumb.Models.heritage.Client;
 import com.GreenThumb.Models.heritage.Jardinier;
 import jakarta.persistence.*;
@@ -18,7 +19,6 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity
 public class TacheDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +26,8 @@ public class TacheDTO {
     private String Description;
     private Date date;
     private StatutTache statutTache;
+    private Long equipementID;
+
 
 
 }

@@ -24,12 +24,14 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // Disable CSRF protection
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/user/register", "/user/login").permitAll() // Allow unauthenticated access to these endpoints
-                        .requestMatchers("/rendezvous").permitAll() // Public access to getAllRendezVous
-                        .requestMatchers("/rendezvous/**").hasRole("ADMIN") // Only ADMIN can access these endpoints
-                        .requestMatchers("/equipements").permitAll() // Public access to getAllEquipements
-                        .requestMatchers("/equipements/**").hasRole("USER") // Restrict access to /equipements/** to users with the ROLE_USER
-                        .anyRequest().authenticated() // All other requests require authentication
+                        .requestMatchers("/auth/register", "/auth/login").permitAll()
+                        .requestMatchers("/rendezvous/**").hasAuthority("ROLE_CLIENT")
+                        .requestMatchers("/rendezvous/**").hasAuthority("ROLE_Jardinier")
+                        .requestMatchers("/taches/**").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers("/equipements/**").hasAuthority("ROLE_ADMIN")
+
+
+                        .anyRequest().permitAll() // All other requests require authentication
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // Stateless sessions
