@@ -1,5 +1,6 @@
 package com.GreenThumb.Auth;
 
+
 import lombok.RequiredArgsConstructor;
 import com.GreenThumb.Config.JwtService;
 import com.GreenThumb.Models.heritage.User;
@@ -22,6 +23,7 @@ public class AuthenticationService {
     public AuthenticationResponse register(RegisterRequest request) {
         var user = User.builder()
                 .fullName(request.getFullname())
+                .phone(request.getPhone())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole()) // Use the role from the request

@@ -1,5 +1,6 @@
 package com.GreenThumb.Models;
 
+import com.GreenThumb.Models.Enums.StatutTache;
 import com.GreenThumb.Models.Enums.StatutTâche;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,5 +23,5 @@ public class Tache {
     private Date date;
 
     @Enumerated(EnumType.STRING)
-    private StatutTâche statutTâche;
+    private StatutTache statutTache;
 }
