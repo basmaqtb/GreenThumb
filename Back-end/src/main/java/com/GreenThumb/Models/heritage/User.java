@@ -23,8 +23,10 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String fullName;
+    private String phone;
     private String email;
     private String password;
+
 
     @Enumerated(EnumType.STRING)
     private Role role;

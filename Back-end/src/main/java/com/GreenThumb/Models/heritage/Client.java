@@ -9,11 +9,11 @@ import lombok.*;
 
 import java.util.List;
 
-@Builder
+
 @Setter
 @Getter
 @Entity
-public class Client extends Personne {
+public class Client extends User {
 
     public Client(Long id, String nom, String username, String password, String phone , Role role) {
         super(id, nom, username, password,phone, role);

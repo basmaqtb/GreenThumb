@@ -14,6 +14,8 @@ public class RegisterRequest {
 
     private String fullname;
 
+    private String phone;
+
     private String email;
 
     private String password;
