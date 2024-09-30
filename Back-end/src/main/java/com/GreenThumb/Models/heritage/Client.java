@@ -2,6 +2,7 @@ package com.GreenThumb.Models.heritage;
 
 
 import com.GreenThumb.Models.Enums.Role;
+import com.GreenThumb.Models.RendezVous;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -25,4 +26,7 @@ public class Client extends User {
         super();
         this.setRole(Role.Client);
     }
+
+    @OneToMany(mappedBy = "client")
+    private List<RendezVous> rendezVousList;
 }

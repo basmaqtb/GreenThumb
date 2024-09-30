@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,4 +25,11 @@ public class Equipement {
 
     @Enumerated(EnumType.STRING)
     private EtatEquipement etat;
+
+    @OneToMany(mappedBy = "equipement")
+    private List<Tache> taches;
+
+    @ManyToOne
+    @JoinColumn(name = "stock_id")
+    private Stock stock;
 }
