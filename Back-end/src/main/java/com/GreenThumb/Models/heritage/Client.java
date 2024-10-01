@@ -16,11 +16,10 @@ import java.util.List;
 @Entity
 public class Client extends User {
 
-    public Client(Long id, String nom, String username, String password, String phone , Role role) {
-        super(id, nom, username, password,phone, role);
-        this.setRole(Role.Client);
+    public Client(Long id, String fullName, String phone, String email, String password, Role role, List<RendezVous> rendezVousList) {
+        super(id, fullName, phone, email, password, role);
+        this.rendezVousList = rendezVousList;
     }
-
 
     public Client(){
         super();

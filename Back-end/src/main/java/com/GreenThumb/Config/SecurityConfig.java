@@ -29,6 +29,8 @@ public class SecurityConfig {
                         .requestMatchers("/rendezvous/**").hasAuthority("ROLE_Jardinier")
                         .requestMatchers("/taches/**").hasAuthority("ROLE_ADMIN")
                         .requestMatchers("/equipements/**").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers("/auth/users**").hasAuthority("ROLE_ADMIN")
+
 
                         .anyRequest().permitAll() // All other requests require authentication
                 )

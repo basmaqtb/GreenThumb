@@ -29,9 +29,9 @@ public class TacheController {
         return ResponseEntity.ok(tacheMapper.toDto(taches));
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<TacheDTO> createTache(@RequestBody TacheDTO tacheDTO) {
-        Tache createdTache = tacheService.createTache(tacheDTO);
+    @PostMapping("/add/{equipementId}")
+    public ResponseEntity<TacheDTO> createTache(@RequestBody TacheDTO tacheDTO, @PathVariable Long equipementId) {
+        Tache createdTache = tacheService.createTache(tacheDTO, equipementId);
         return ResponseEntity.status(HttpStatus.CREATED).body(tacheMapper.toDto(createdTache));
     }
 

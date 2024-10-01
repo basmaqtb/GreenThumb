@@ -4,6 +4,7 @@ import com.GreenThumb.DTO.TacheDTO;
 import com.GreenThumb.Exceptions.TacheNotFoundException;
 import com.GreenThumb.Mappers.TacheMapper;
 import com.GreenThumb.Models.Enums.StatutTache;
+import com.GreenThumb.Models.Equipement;
 import com.GreenThumb.Models.Tache;
 import com.GreenThumb.Repositories.EquipementRepository;
 import com.GreenThumb.Repositories.TacheRepository;
@@ -24,10 +25,18 @@ public class TacheService {
     @Autowired
     private EquipementRepository equipementRepository;
 
+    // Create a new Tache associated with an existing Equipement
+    public Tache createTache(TacheDTO tacheDTO, Long equipementId) {
+        // Find the Equipement by ID
+        Equipement equipement = equipementRepository.findById(equipementId)
+                .orElseThrow(TacheNotFoundException::new);
 
-    public Tache createTache(TacheDTO tacheDTO) {
+        // Map DTO to entity and set the Equipement
         Tache tache = tacheMapper.toEntity(tacheDTO);
         tache.setStatutTache(StatutTache.EnCours);
+        tache.setEquipement(equipement); // Set the existing equipement
+
+        // Save the Tache
         return tacheRepository.save(tache);
     }
 

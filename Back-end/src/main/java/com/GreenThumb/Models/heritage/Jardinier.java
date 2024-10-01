@@ -16,8 +16,10 @@ import java.util.Set;
 @Getter
 @Entity
 public class Jardinier extends User{
-    public Jardinier(Long id, String fullname, String email, String password, String phone, Role role) {
-        super(id, fullname, email, password, phone, role);
+
+    public Jardinier(Long id, String fullName, String phone, String email, String password, Role role, List<RendezVous> rendezVousList) {
+        super(id, fullName, phone, email, password, role);
+        this.rendezVousList = rendezVousList;
     }
 
     public Jardinier() {
