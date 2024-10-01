@@ -30,7 +30,6 @@ public class SecurityConfig {
                         .requestMatchers("/taches/**").hasAuthority("ROLE_ADMIN")
                         .requestMatchers("/equipements/**").hasAuthority("ROLE_ADMIN")
 
-
                         .anyRequest().permitAll() // All other requests require authentication
                 )
                 .sessionManagement(session -> session
