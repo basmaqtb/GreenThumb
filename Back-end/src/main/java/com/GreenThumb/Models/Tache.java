@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,4 +25,11 @@ public class Tache {
 
     @Enumerated(EnumType.STRING)
     private StatutTache statutTache;
+
+    @OneToMany(mappedBy = "tache")
+    private List<RendezVous> rendezVousList;
+
+    @ManyToOne
+    @JoinColumn(name = "equipement_id")
+    private Equipement equipement;
 }

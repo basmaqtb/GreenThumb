@@ -1,0 +1,55 @@
+/* Global Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Navbar Styles */
+.navbar {
+    padding: 1rem; /* Add padding for a better look */
+}
+
+.navbar-brand {
+    font-size: 1.5rem; /* Increase font size of the brand */
+}
+
+.navbar ul {
+    list-style: none; /* Remove default list styles */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    display: flex; /* Display list items in a row */
+}
+
+.navbar li {
+    margin-left: 1rem; /* Space between nav items */
+}
+
+.nav-link {
+    color: #ffffff; /* Change link color to white */
+    text-decoration: none; /* Remove underline from links */
+    padding: 0.5rem 1rem; /* Add padding for links */
+    border-radius: 4px; /* Round the corners of the links */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Lighten background on hover */
+}
+
+/* Router Outlet Styles */
+router-outlet {
+    display: block; /* Ensures router outlet takes space */
+    padding: 1rem; /* Add padding around router outlet */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .navbar ul {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+        align-items: center; /* Center items */
+    }
+
+    .navbar li {
+        margin: 0.5rem 0; /* Space between items */
+    }
+}
