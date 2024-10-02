@@ -9,11 +9,9 @@ import com.GreenThumb.Services.EquipementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/equipements")
@@ -39,17 +37,17 @@ public class EquipementController {
     }
 
 
-    @GetMapping("/{id}")
-    public ResponseEntity<EquipementDTO> getEquipementById(@PathVariable("id") Long id) {
-        Equipement equipement = equipementService.getEquipmentById(id);
+    @GetMapping("/{idequipement}")
+    public ResponseEntity<EquipementDTO> getEquipementById(@PathVariable("idequipement") Long idequipement) {
+        Equipement equipement = equipementService.getEquipmentById(idequipement);
         EquipementDTO equipementDTO = equipementMapper.toDto(equipement);
         return ResponseEntity.ok(equipementDTO);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<EquipementDTO> updateEquipement(@PathVariable Long id, @RequestBody EquipementDTO updatedEquipementDTO) {
+    @PutMapping("/update/{idequipement}")
+    public ResponseEntity<EquipementDTO> updateEquipement(@PathVariable Long idequipement, @RequestBody EquipementDTO updatedEquipementDTO) {
         try {
-            var updatedEquipement = equipementService.updateEquipement(id, updatedEquipementDTO);
+            var updatedEquipement = equipementService.updateEquipement(idequipement, updatedEquipementDTO);
 
             return ResponseEntity.ok(equipementMapper.toDto(updatedEquipement));
         } catch (ResourceNotFoundException e) {
@@ -57,10 +55,10 @@ public class EquipementController {
         }
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteEquipement(@PathVariable Long id) {
+    @DeleteMapping("/delete/{idequipement}")
+    public ResponseEntity<Void> deleteEquipement(@PathVariable Long idequipement) {
         try {
-            equipementService.deleteEquipment(id);
+            equipementService.deleteEquipment(idequipement);
             return ResponseEntity.noContent().build();  // Returns a 204 No Content status
         } catch (EquipmentNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();  // Returns a 404 Not Found status if the equipment is not found

@@ -19,7 +19,7 @@ import java.util.List;
 public class Tache {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idtache;
     private String description;
     private Date date;
 
@@ -30,6 +30,6 @@ public class Tache {
     private List<RendezVous> rendezVousList;
 
     @ManyToOne
-    @JoinColumn(name = "equipement_id")
+    @JoinColumn(name = "idequipement")
     private Equipement equipement;
 }

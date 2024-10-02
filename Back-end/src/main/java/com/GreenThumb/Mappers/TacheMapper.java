@@ -11,8 +11,9 @@ import java.util.List;
 public interface TacheMapper {
 
     Tache toEntity(TacheDTO tacheDto);
+    TacheDTO toDto(Tache tache);
     Tache partialUpdate(TacheDTO tacheDto, @MappingTarget Tache tache);
     List<Tache> toEntity(List<TacheDTO> list);
     List<TacheDTO> toDto(List<Tache> list);
-    TacheDTO toDto(Tache tache);
+
 }

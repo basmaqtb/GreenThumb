@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EquipementService {
@@ -35,12 +34,12 @@ public class EquipementService {
         }
         return equipments;    }
 
-    public Equipement getEquipmentById(Long id) {
-        return equipementRepository.findById(id).orElseThrow(EquipmentNotFoundException::new);
+    public Equipement getEquipmentById(Long idequipement) {
+        return equipementRepository.findById(idequipement).orElseThrow(EquipmentNotFoundException::new);
     }
 
-    public Equipement updateEquipement(Long id, EquipementDTO equipementDTO) {
-        Equipement existingEquipement = equipementRepository.findById(id)
+    public Equipement updateEquipement(Long idequipement, EquipementDTO equipementDTO) {
+        Equipement existingEquipement = equipementRepository.findById(idequipement)
                 .orElseThrow(ResourceNotFoundException::new);
 
         existingEquipement.setType(equipementDTO.getType());
@@ -52,8 +51,8 @@ public class EquipementService {
     }
 
 
-    public void deleteEquipment(Long id) {
-        var equipment = equipementRepository.findById(id).orElseThrow(EquipmentNotFoundException::new);
+    public void deleteEquipment(Long idequipement) {
+        var equipment = equipementRepository.findById(idequipement).orElseThrow(EquipmentNotFoundException::new);
         equipementRepository.delete(equipment);
     }
 }

@@ -22,11 +22,11 @@ import java.util.Date;
 public class TacheDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String Description;
+    private Long idtache;
+    private String description;
     private Date date;
     private StatutTache statutTache;
-    private Long equipementID;
+    private Long idequipement;
 
 
 

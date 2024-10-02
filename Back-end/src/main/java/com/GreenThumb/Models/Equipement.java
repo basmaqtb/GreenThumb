@@ -18,7 +18,7 @@ import java.util.List;
 public class Equipement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idequipement;
     private String type;
     private String marque;
     private String model;

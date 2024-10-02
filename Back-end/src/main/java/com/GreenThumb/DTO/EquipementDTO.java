@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EquipementDTO {
-    private Long id;
+    private Long idequipement;
     private String type;
     private String marque;
     private String model;
