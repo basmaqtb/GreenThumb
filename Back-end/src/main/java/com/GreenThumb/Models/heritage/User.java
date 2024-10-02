@@ -17,6 +17,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)  // Stratégie JOINED
 public class User implements UserDetails {
 
     @Id
@@ -26,7 +28,6 @@ public class User implements UserDetails {
     private String phone;
     private String email;
     private String password;
-
 
     @Enumerated(EnumType.STRING)
     private Role role;

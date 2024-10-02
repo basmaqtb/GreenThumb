@@ -21,23 +21,25 @@ import java.util.Date;
 public class RendezVous {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idRendezVous;
     private Date date;
     private Time heure;
+    private String Lieu;
+
 
     @Enumerated(EnumType.STRING)
     private StatutRendezVous statutRendezVous;
 
     @ManyToOne
-    @JoinColumn(name = "jardinier_id")
+    @JoinColumn(name = "idjardinier")
     private Jardinier jardinier;
 
     @ManyToOne
-    @JoinColumn(name = "client_id")
+    @JoinColumn(name = "idclient")
     private Client client;
 
     @ManyToOne
-    @JoinColumn(name = "tache_id")
+    @JoinColumn(name = "idtache")
     private Tache tache;
 
 }

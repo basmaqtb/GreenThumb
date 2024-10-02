@@ -18,11 +18,12 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RendezVousDTO {
-    private Long id;
+    private Long idRendezVous;
     private Date date;
     private Time heure;
+    private String Lieu;
     private StatutRendezVous statutRendezVous;
-    private Long tacheID;
-    private Long clientId;
-    private Long jardinierId;
+    private Long idtache;
+    private Long idclient;
+    private Long idjardinier;
 }
