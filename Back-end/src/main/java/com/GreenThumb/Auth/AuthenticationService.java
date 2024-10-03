@@ -31,7 +31,8 @@ public class AuthenticationService {
         userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
-                .token(jwtToken).build();
+                .token(jwtToken).role(user.getRole().name())  // Include the user's role
+                .build();
     }
 
     public AuthenticationResponse login(AuthenticationRequest request) {
@@ -41,8 +42,17 @@ public class AuthenticationService {
                 )
         );
 
-        var user = userRepository.findByEmail(request.getEmail()).orElseThrow();
+        // Fetch the user from the repository
+        var user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        // Generate the JWT token with the role
         var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder().token(jwtToken).build();
+
+        // Return both token and role in the response
+        return AuthenticationResponse.builder()
+                .token(jwtToken)
+                .role(user.getRole().name())  // Include the user's role
+                .build();
     }
 }

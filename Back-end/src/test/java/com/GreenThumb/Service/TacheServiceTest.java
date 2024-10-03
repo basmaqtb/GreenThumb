@@ -55,7 +55,7 @@ class TacheServiceTest {
         when(tacheMapper.toDto(tache)).thenReturn(tacheDTO);
 
         // Act
-        TacheDTO createdTacheDTO = tacheService.createTache(tacheDTO, equipementId);
+        TacheDTO createdTacheDTO = tacheService.createTache(tacheDTO);
 
         // Assert
         assertNotNull(createdTacheDTO);

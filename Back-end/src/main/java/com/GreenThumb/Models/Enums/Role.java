@@ -1,5 +1,7 @@
 package com.GreenThumb.Models.Enums;
 
 public enum Role {
-    ADMIN,Client,Jardinier
+    ADMIN,
+    Client,
+    Jardinier
 }

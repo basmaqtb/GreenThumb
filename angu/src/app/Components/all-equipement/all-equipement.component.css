@@ -1,0 +1,88 @@
+/* equipement-list.component.css */
+
+.equipement-list-container {
+    padding: 20px;
+  }
+  
+  .equipement-list-container h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .search-container {
+    margin-bottom: 20px;
+  }
+  
+  .search-container input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table thead {
+    background-color: #f8f9fa;
+  }
+  
+  .table th {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 2px solid #ddd;
+    font-weight: bold;
+  }
+  
+  .table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .table .btn {
+    margin-right: 5px;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c82333;
+  }
+  
+  .btn-warning {
+    background-color: #ffc107;
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn-warning:hover {
+    background-color: #e0a800;
+  }
+  
+  .no-equipement-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .no-equipement-container p {
+    font-size: 18px;
+    color: #777;
+  }
+  

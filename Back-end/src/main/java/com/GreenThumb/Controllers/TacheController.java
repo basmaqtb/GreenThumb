@@ -29,26 +29,10 @@ public class TacheController {
         List<Tache> taches = tacheService.getAllTaches();
         return ResponseEntity.ok(tacheMapper.toDto(taches));
     }
-//
-//    @PostMapping("/add")
-//    public ResponseEntity<TacheDTO> createTache(@RequestBody TacheDTO tacheDTO) {
-//        Tache createdTache = tacheService.createTache(tacheDTO);
-//        return ResponseEntity.status(HttpStatus.CREATED).body(tacheMapper.toDto(createdTache));
-//    }
 
-//    @PutMapping("/update/{idtache}")
-//    public ResponseEntity<TacheDTO> updateTache(@PathVariable Long idtache, @RequestBody TacheDTO updatedTacheDTO) {
-//        try {
-//            Tache updatedTache = tacheService.updateTache(idtache, updatedTacheDTO);
-//            return ResponseEntity.ok(tacheMapper.toDto(updatedTache));
-//        } catch (TacheNotFoundException e) {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-//        }
-//    }
-
-    @PostMapping("/add/{idequipement}")
-    public ResponseEntity<TacheDTO> createTache(@Valid @RequestBody TacheDTO tacheDTO, @PathVariable("idequipement") Long idequipement) {
-        TacheDTO createdTache = tacheService.createTache(tacheDTO, idequipement);
+    @PostMapping("/add")
+    public ResponseEntity<TacheDTO> createTache(@Valid @RequestBody TacheDTO tacheDTO) {
+        TacheDTO createdTache = tacheService.createTache(tacheDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdTache);
     }
 
@@ -58,16 +42,12 @@ public class TacheController {
         return ResponseEntity.ok(tacheMapper.toDto(updatedTache));
     }
 
-
-
-
     @GetMapping("/{idtache}")
     public ResponseEntity<TacheDTO> getTacheById(@PathVariable("idtache") Long idtache) {
         Tache tache = tacheService.getTacheById(idtache);
         TacheDTO tacheDTO = tacheMapper.toDto(tache);
         return ResponseEntity.ok(tacheDTO);
     }
-
 
     @DeleteMapping("/delete/{idtache}")
     public ResponseEntity<Void> deleteTache(@PathVariable Long idtache) {

@@ -26,8 +26,8 @@ public class TacheService {
     private EquipementRepository equipementRepository;
 
 
-    public TacheDTO createTache(TacheDTO tacheDTO, Long idequipement) {
-        Equipement equipement = equipementRepository.findById(idequipement)
+    public TacheDTO createTache(TacheDTO tacheDTO) {
+        Equipement equipement = equipementRepository.findById(tacheDTO.getIdequipement())
                 .orElseThrow(() -> new RuntimeException("Equipement not found with id: " + tacheDTO.getIdequipement()));
 
         Tache tache = tacheMapper.toEntity(tacheDTO);
