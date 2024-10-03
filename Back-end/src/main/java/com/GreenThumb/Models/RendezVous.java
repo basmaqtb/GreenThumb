@@ -4,6 +4,7 @@ import com.GreenThumb.Models.Enums.EtatEquipement;
 import com.GreenThumb.Models.Enums.StatutRendezVous;
 import com.GreenThumb.Models.heritage.Client;
 import com.GreenThumb.Models.heritage.Jardinier;
+import com.GreenThumb.Models.heritage.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,23 +22,26 @@ import java.util.Date;
 public class RendezVous {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idRendezVous;
     private Date date;
     private Time heure;
+    private String Lieu;
+
 
     @Enumerated(EnumType.STRING)
     private StatutRendezVous statutRendezVous;
 
     @ManyToOne
-    @JoinColumn(name = "jardinier_id")
-    private Jardinier jardinier;
+    @JoinColumn(name = "idjardinier")
+    private User jardinier;
 
     @ManyToOne
-    @JoinColumn(name = "client_id")
-    private Client client;
+    @JoinColumn(name = "idclient")
+    private User client;
+
 
     @ManyToOne
-    @JoinColumn(name = "tache_id")
+    @JoinColumn(name = "idtache")
     private Tache tache;
 
 }

@@ -1,6 +1,7 @@
 package com.GreenThumb.Models.heritage;
 
 import com.GreenThumb.Models.Enums.Role;
+import com.GreenThumb.Models.RendezVous;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,6 +18,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)  // Stratégie JOINED
 public class User implements UserDetails {
 
     @Id
@@ -26,7 +29,6 @@ public class User implements UserDetails {
     private String phone;
     private String email;
     private String password;
-
 
     @Enumerated(EnumType.STRING)
     private Role role;

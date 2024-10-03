@@ -11,7 +11,6 @@ import com.GreenThumb.Repositories.TacheRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -27,41 +26,19 @@ public class TacheService {
     private EquipementRepository equipementRepository;
 
 
-//    public Tache createTache(TacheDTO tacheDTO) {
-//
-//        Equipement equipement = equipementRepository.findById(tacheDTO.getEquipementID())
-//                .orElseThrow(() -> new RuntimeException("Equipement not found with id: " + tacheDTO.getEquipementID()));
-//
-//        Tache tache = tacheMapper.toEntity(tacheDTO);
-//        tache.setStatutTache(StatutTache.EnCours);
-//        tache.setEquipement(equipement);  // Set the existing equipement
-//
-//      Tache Savedtache = tacheRepository.save(tache);
-//
-//        return tacheMapper.toDto(Savedtache);
-//    }
-
-    public TacheDTO createTache(TacheDTO tacheDTO) {
-
-        // Rechercher l'équipement associé à l'ID de l'équipement dans TacheDTO
-        Equipement equipement = equipementRepository.findById(tacheDTO.getIdequipement())
+    public TacheDTO createTache(TacheDTO tacheDTO, Long idequipement) {
+        Equipement equipement = equipementRepository.findById(idequipement)
                 .orElseThrow(() -> new RuntimeException("Equipement not found with id: " + tacheDTO.getIdequipement()));
 
-        // Mapper le reste des champs de TacheDTO vers Tache
         Tache tache = tacheMapper.toEntity(tacheDTO);
-
-        // Ajouter manuellement l'équipement trouvé
         tache.setEquipement(equipement);
-
-        // Définir le statut initial de la tâche
         tache.setStatutTache(StatutTache.EnCours);
 
-        // Sauvegarder la tâche dans la base de données
         Tache savedTache = tacheRepository.save(tache);
 
-        // Retourner la tâche sauvegardée sous forme de DTO
         return tacheMapper.toDto(savedTache);
     }
+
 
 
 

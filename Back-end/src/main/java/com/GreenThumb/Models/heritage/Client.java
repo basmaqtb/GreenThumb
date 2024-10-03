@@ -16,8 +16,8 @@ import java.util.List;
 @Entity
 public class Client extends User {
 
-    public Client(Long id, String fullName, String phone, String email, String password, Role role, List<RendezVous> rendezVousList) {
-        super(id, fullName, phone, email, password, role);
+    public Client(Long idclient, String fullName, String phone, String email, String password, Role role, List<RendezVous> rendezVousList) {
+        super(idclient, fullName, phone, email, password, role);
         this.rendezVousList = rendezVousList;
     }
 

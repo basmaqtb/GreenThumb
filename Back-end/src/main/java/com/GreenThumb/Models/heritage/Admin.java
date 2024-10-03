@@ -10,8 +10,8 @@ import lombok.Setter;
 @Entity
 public class Admin extends User {
 
-    public Admin(Long id, String fullName, String phone, String email, String password, Role role) {
-        super(id, fullName, phone, email, password, role);
+    public Admin(Long idadmin, String fullName, String phone, String email, String password, Role role) {
+        super(idadmin, fullName, phone, email, password, role);
     }
 
     public Admin() {

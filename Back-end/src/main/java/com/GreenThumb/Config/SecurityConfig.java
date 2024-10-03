@@ -25,8 +25,8 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // Disable CSRF protection
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/auth/register", "/auth/login").permitAll()
-                        .requestMatchers("/rendezvous/**").hasAuthority("ROLE_CLIENT")
-                        .requestMatchers("/rendezvous/**").hasAuthority("ROLE_Jardinier")
+                        .requestMatchers("/rendezvous/**").hasAuthority("ROLE_ADMIN")
+//                        .requestMatchers("/rendezvous/**").hasAuthority("ROLE_Jardinier")
                         .requestMatchers("/taches/**").hasAuthority("ROLE_ADMIN")
                         .requestMatchers("/equipements/**").hasAuthority("ROLE_ADMIN")
                         .requestMatchers("/auth/users**").hasAuthority("ROLE_ADMIN")
