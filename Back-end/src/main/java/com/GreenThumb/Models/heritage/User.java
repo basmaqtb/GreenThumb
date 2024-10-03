@@ -1,6 +1,7 @@
 package com.GreenThumb.Models.heritage;
 
 import com.GreenThumb.Models.Enums.Role;
+import com.GreenThumb.Models.RendezVous;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;

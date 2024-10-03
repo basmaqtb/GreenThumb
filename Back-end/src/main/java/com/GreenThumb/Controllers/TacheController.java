@@ -5,6 +5,7 @@ import com.GreenThumb.Exceptions.TacheNotFoundException;
 import com.GreenThumb.Mappers.TacheMapper;
 import com.GreenThumb.Models.Tache;
 import com.GreenThumb.Services.TacheService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,11 +36,28 @@ public class TacheController {
 //        return ResponseEntity.status(HttpStatus.CREATED).body(tacheMapper.toDto(createdTache));
 //    }
 
-    @PostMapping("/add")
-    public ResponseEntity<TacheDTO> createTache(@RequestBody TacheDTO tacheDTO) {
-        TacheDTO createdTache = tacheService.createTache(tacheDTO);  // Service retourne déjà un TacheDTO
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdTache);  // Pas besoin de remapper
+//    @PutMapping("/update/{idtache}")
+//    public ResponseEntity<TacheDTO> updateTache(@PathVariable Long idtache, @RequestBody TacheDTO updatedTacheDTO) {
+//        try {
+//            Tache updatedTache = tacheService.updateTache(idtache, updatedTacheDTO);
+//            return ResponseEntity.ok(tacheMapper.toDto(updatedTache));
+//        } catch (TacheNotFoundException e) {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+//        }
+//    }
+
+    @PostMapping("/add/{idequipement}")
+    public ResponseEntity<TacheDTO> createTache(@Valid @RequestBody TacheDTO tacheDTO, @PathVariable("idequipement") Long idequipement) {
+        TacheDTO createdTache = tacheService.createTache(tacheDTO, idequipement);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdTache);
     }
+
+    @PutMapping("/update/{idtache}")
+    public ResponseEntity<TacheDTO> updateTache(@PathVariable Long idtache, @Valid @RequestBody TacheDTO updatedTacheDTO) {
+        Tache updatedTache = tacheService.updateTache(idtache, updatedTacheDTO);
+        return ResponseEntity.ok(tacheMapper.toDto(updatedTache));
+    }
+
 
 
 
@@ -50,15 +68,6 @@ public class TacheController {
         return ResponseEntity.ok(tacheDTO);
     }
 
-    @PutMapping("/update/{idtache}")
-    public ResponseEntity<TacheDTO> updateTache(@PathVariable Long idtache, @RequestBody TacheDTO updatedTacheDTO) {
-        try {
-            Tache updatedTache = tacheService.updateTache(idtache, updatedTacheDTO);
-            return ResponseEntity.ok(tacheMapper.toDto(updatedTache));
-        } catch (TacheNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-    }
 
     @DeleteMapping("/delete/{idtache}")
     public ResponseEntity<Void> deleteTache(@PathVariable Long idtache) {

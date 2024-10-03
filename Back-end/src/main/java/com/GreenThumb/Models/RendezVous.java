@@ -4,6 +4,7 @@ import com.GreenThumb.Models.Enums.EtatEquipement;
 import com.GreenThumb.Models.Enums.StatutRendezVous;
 import com.GreenThumb.Models.heritage.Client;
 import com.GreenThumb.Models.heritage.Jardinier;
+import com.GreenThumb.Models.heritage.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,11 +33,12 @@ public class RendezVous {
 
     @ManyToOne
     @JoinColumn(name = "idjardinier")
-    private Jardinier jardinier;
+    private User jardinier;
 
     @ManyToOne
     @JoinColumn(name = "idclient")
-    private Client client;
+    private User client;
+
 
     @ManyToOne
     @JoinColumn(name = "idtache")

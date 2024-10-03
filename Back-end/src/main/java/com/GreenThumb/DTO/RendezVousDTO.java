@@ -21,7 +21,7 @@ public class RendezVousDTO {
     private Long idRendezVous;
     private Date date;
     private Time heure;
-    private String Lieu;
+    private String lieu;
     private StatutRendezVous statutRendezVous;
     private Long idtache;
     private Long idclient;

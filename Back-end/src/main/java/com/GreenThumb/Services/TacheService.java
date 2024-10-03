@@ -11,7 +11,6 @@ import com.GreenThumb.Repositories.TacheRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -27,13 +26,11 @@ public class TacheService {
     private EquipementRepository equipementRepository;
 
 
-    public TacheDTO createTache(TacheDTO tacheDTO) {
-
-        Equipement equipement = equipementRepository.findById(tacheDTO.getIdequipement())
+    public TacheDTO createTache(TacheDTO tacheDTO, Long idequipement) {
+        Equipement equipement = equipementRepository.findById(idequipement)
                 .orElseThrow(() -> new RuntimeException("Equipement not found with id: " + tacheDTO.getIdequipement()));
 
         Tache tache = tacheMapper.toEntity(tacheDTO);
-
         tache.setEquipement(equipement);
         tache.setStatutTache(StatutTache.EnCours);
 
@@ -41,6 +38,7 @@ public class TacheService {
 
         return tacheMapper.toDto(savedTache);
     }
+
 
 
 

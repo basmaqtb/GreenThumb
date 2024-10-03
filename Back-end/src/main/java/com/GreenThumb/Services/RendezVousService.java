@@ -5,11 +5,12 @@ import com.GreenThumb.Exceptions.RendezVousNotFoundException;
 import com.GreenThumb.Exceptions.ResourceNotFoundException;
 import com.GreenThumb.Exceptions.TacheNotFoundException;
 import com.GreenThumb.Mappers.RendezVousMapper;
+import com.GreenThumb.Models.Enums.Role;
 import com.GreenThumb.Models.Enums.StatutRendezVous;
 import com.GreenThumb.Models.RendezVous;
 import com.GreenThumb.Models.Tache;
-import com.GreenThumb.Models.heritage.Client;
 import com.GreenThumb.Models.heritage.Jardinier;
+import com.GreenThumb.Models.heritage.User;
 import com.GreenThumb.Repositories.ClientRepository;
 import com.GreenThumb.Repositories.JardinierRepository;
 import com.GreenThumb.Repositories.RendezVousRepository;
@@ -43,29 +44,33 @@ public class RendezVousService {
     private RendezVousMapper rendezVousMapper;
 
     // Création d'un rendez-vous
-    public RendezVousDTO createRendezVous(RendezVousDTO rendezVousDTO) {
+    public RendezVousDTO createRendezVous(RendezVousDTO rendezVousDTO, Long idclient) {
 
         Tache tache = tacheRepository.findById(rendezVousDTO.getIdtache())
                 .orElseThrow(TacheNotFoundException::new);
 
-        Client client = clientRepository.findById(rendezVousDTO.getIdclient())
-                .orElseThrow(TacheNotFoundException::new);
+        Role role = Role.Client;
+
+        User client = userRepository.findByRoleAndId(role,idclient)
+                .orElseThrow(() -> new RuntimeException("client not found"));
 
         RendezVous rendezVous = rendezVousMapper.toEntity(rendezVousDTO);
         rendezVous.setClient(client);
         rendezVous.setTache(tache);
-
+        rendezVous.setJardinier(null);
         RendezVous saved = rendezVousRepository.save(rendezVous);
         return rendezVousMapper.toDto(saved);
     }
 
-    // Attribution d'un rendez-vous à un jardinier
+
     public RendezVousDTO attribuerRendezVous(Long idRendezVous, Long idJardinier) {
 
         RendezVous rendezVous = rendezVousRepository.findById(idRendezVous)
                 .orElseThrow(RendezVousNotFoundException::new);
 
-        Jardinier jardinier = jardinierRepository.findById(idJardinier)
+        Role role = Role.Jardinier;
+
+        User jardinier = userRepository.findByRoleAndId(role, idJardinier)
                 .orElseThrow(() -> new RuntimeException("Jardinier not found"));
 
         rendezVous.setStatutRendezVous(StatutRendezVous.EnCours);
@@ -74,6 +79,7 @@ public class RendezVousService {
         RendezVous saved = rendezVousRepository.save(rendezVous);
         return rendezVousMapper.toDto(saved);
     }
+
 
     // Récupérer les rendez-vous par jardinier
     public List<RendezVousDTO> getRendezVousByJardinier(Long idJardinier) {
