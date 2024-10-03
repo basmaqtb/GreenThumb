@@ -8,12 +8,20 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationService } from './Services/auth.service';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
+import { AddEquipementComponent } from './Components/add-equipement/add-equipement.component';
+import { AllEquipementComponent } from './Components/all-equipement/all-equipement.component';
+import { AllTachesComponent } from './Components/all-taches/all-taches.component';
+import { AddTacheComponent } from './Components/add-tache/add-tache.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
-    LoginComponent  
+    LoginComponent,
+    AddEquipementComponent,
+    AllEquipementComponent,
+    AllTachesComponent,
+    AddTacheComponent  
   ],
   imports: [
     BrowserModule,

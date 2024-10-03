@@ -1,3 +1,4 @@
-export class Jwt{
-    token! : string
+export interface Jwt{
+    token : string
+    role : string
 }

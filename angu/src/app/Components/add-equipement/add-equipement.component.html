@@ -1,0 +1,36 @@
+<div class="equipement-form">
+    <h2>{{ isEditMode ? 'Edit Equipement' : 'Create Equipement' }}</h2>
+    <form [formGroup]="equipementForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="type">Type</label>
+        <input id="type" formControlName="type" class="form-control" />
+      </div>
+  
+      <div class="form-group">
+        <label for="marque">Brand</label>
+        <input id="marque" formControlName="marque" class="form-control" />
+      </div>
+  
+      <div class="form-group">
+        <label for="model">Model</label>
+        <input id="model" formControlName="model" class="form-control" />
+      </div>
+  
+      <div class="form-group">
+        <label for="etat">State</label>
+        <select 
+          class="form-control" 
+          id="etat" 
+          formControlName="etat" 
+          required
+        >
+          <option value="" disabled>Select the state</option>
+          <option value="Disponible">Disponible</option>
+          <option value="NonDisponible">NonDisponible</option>
+        </select>
+      </div>
+  
+      <button type="submit" class="btn btn-success">{{ isEditMode ? 'Update' : 'Create' }}</button>
+    </form>
+  </div>
+  

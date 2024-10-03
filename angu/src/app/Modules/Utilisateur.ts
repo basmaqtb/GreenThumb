@@ -1,8 +1,8 @@
-export class Utilisateur {
-    id_user: number = 0;
-    fullname!: string;
-    phone!:string;
-    email!: string;
-    password!: string;
-    role! : string;
+export interface Utilisateur {
+    id_user: number ;
+    fullname: string;
+    phone:string;
+    email: string;
+    password: string;
+    role : string
   }

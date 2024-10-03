@@ -1,0 +1,19 @@
+.equipement-form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .equipement-form .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .equipement-form .form-control {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+  }
+  
+  .equipement-form .btn {
+    margin-top: 10px;
+  }

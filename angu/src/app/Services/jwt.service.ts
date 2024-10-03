@@ -27,6 +27,7 @@ export class JwtService {
   
   private createAuthorizationHeader(): HttpHeaders | undefined {
     const jwtToken = localStorage.getItem('jwt');
+    const role = localStorage.getItem('role');
     if (jwtToken) {
       console.log("JWT token found in local storage", jwtToken);
       return new HttpHeaders().set("Authorization", "Bearer " + jwtToken);

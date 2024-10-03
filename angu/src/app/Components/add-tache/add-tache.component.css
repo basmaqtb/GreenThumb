@@ -1,0 +1,49 @@
+.add-tache-container {
+    max-width: 600px; /* Set the maximum width of the form */
+    margin: 0 auto;   /* Center the form horizontally */
+    padding: 20px;    /* Add padding around the form */
+    border: 1px solid #ccc; /* Optional: Add a border around the form */
+    border-radius: 5px; /* Optional: Add rounded corners */
+    background-color: #f9f9f9; /* Optional: Light background color */
+}
+
+.add-tache-container h2 {
+    text-align: center; /* Center the heading */
+    margin-bottom: 20px; /* Add margin below the heading */
+}
+
+.add-tache-container .form-group {
+    margin-bottom: 15px; /* Add space between form groups */
+}
+
+.add-tache-container .form-control {
+    width: 100%; /* Full width of the input/select elements */
+    padding: 10px; /* Padding inside the input/select elements */
+    border-radius: 4px; /* Rounded corners for input/select */
+    border: 1px solid #ccc; /* Border color for input/select */
+}
+
+.add-tache-container .btn {
+    margin-top: 10px; /* Space above the button */
+    padding: 10px 15px; /* Padding for the button */
+    background-color: #007bff; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none; /* No border for the button */
+    border-radius: 4px; /* Rounded corners for the button */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.add-tache-container .btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.add-tache-container .form-control:focus {
+    border-color: #007bff; /* Border color on focus */
+    outline: none; /* Remove outline on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Shadow effect on focus */
+}
+
+.add-tache-container .form-group div {
+    color: red; /* Error message color */
+    font-size: 12px; /* Font size for error messages */
+}
