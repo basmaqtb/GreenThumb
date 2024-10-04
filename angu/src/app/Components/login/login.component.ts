@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
         const role = response.role;
         localStorage.setItem('jwt', jwToken);
         localStorage.setItem('role', role);
-        this.router.navigateByUrl("/equipements");
+        this.router.navigateByUrl("/dashboard");
       },
       (error) => {
         console.error("Login failed", error);

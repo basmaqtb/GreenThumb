@@ -52,6 +52,11 @@ export class AllTachesComponent implements OnInit {
     this.router.navigate(['/taches/update', id]);
   }
 
+  // Navigate to details tache page
+  details(id: number): void {
+    this.router.navigate(['/taches/details', id]);
+  }
+
   // Search taches based on the search term
   searchTaches(): void {
     if (this.searchTerm === '') {

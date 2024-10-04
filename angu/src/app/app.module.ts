@@ -12,6 +12,8 @@ import { AddEquipementComponent } from './Components/add-equipement/add-equipeme
 import { AllEquipementComponent } from './Components/all-equipement/all-equipement.component';
 import { AllTachesComponent } from './Components/all-taches/all-taches.component';
 import { AddTacheComponent } from './Components/add-tache/add-tache.component';
+import { AllRendezvousComponent } from './Components/all-rendezvous/all-rendezvous.component';
+import { AddRendezvousComponent } from './Components/add-rendezvous/add-rendezvous.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { AddTacheComponent } from './Components/add-tache/add-tache.component';
     AddEquipementComponent,
     AllEquipementComponent,
     AllTachesComponent,
-    AddTacheComponent  
+    AddTacheComponent,
+    AllRendezvousComponent,
+    AddRendezvousComponent  
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,8 @@ import { AllEquipementComponent } from './Components/all-equipement/all-equipeme
 import { AddEquipementComponent } from './Components/add-equipement/add-equipement.component';
 import { AllTachesComponent } from './Components/all-taches/all-taches.component';
 import { AddTacheComponent } from './Components/add-tache/add-tache.component';
+import { AllRendezvousComponent } from './Components/all-rendezvous/all-rendezvous.component';
+import { AddRendezvousComponent } from './Components/add-rendezvous/add-rendezvous.component';
 
 
 
@@ -19,9 +21,12 @@ const routes: Routes = [
   { path: 'dashboard' , component: DashboardComponent},
   { path: 'equipements' , component: AllEquipementComponent},
   { path: 'taches' , component: AllTachesComponent},
+  { path: 'rendezVous' , component: AllRendezvousComponent},
+  { path: 'rendezvous/add', component: AddRendezvousComponent }, 
   { path: 'equipements/add', component: AddEquipementComponent }, 
   { path: 'taches/add', component: AddTacheComponent }, 
-  { path: 'taches/update/:id', component: AddTacheComponent },
+  { path: 'taches/update/:id', component: AddTacheComponent},
+  { path: 'taches/details/:id', component: AddTacheComponent},
 
   
 

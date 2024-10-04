@@ -1,6 +1,7 @@
 package com.GreenThumb.Services;
 
 import com.GreenThumb.DTO.TacheDTO;
+import com.GreenThumb.Exceptions.ResourceNotFoundException;
 import com.GreenThumb.Exceptions.TacheNotFoundException;
 import com.GreenThumb.Mappers.TacheMapper;
 import com.GreenThumb.Models.Enums.StatutTache;
@@ -56,10 +57,24 @@ public class TacheService {
     }
 
     public Tache updateTache(Long idtache, TacheDTO tacheDTO) {
-        var existingTache = tacheRepository.findById(idtache).orElseThrow(TacheNotFoundException::new);
-        var updatedTache = tacheMapper.partialUpdate(tacheDTO, existingTache);
-        return tacheRepository.save(updatedTache);
+        // Fetch the existing Tache from the repository
+        Tache existingTache = tacheRepository.findById(idtache)
+                .orElseThrow(TacheNotFoundException::new);
+
+        // Fetch the Equipement based on the idequipement
+        Equipement equipement = equipementRepository.findById(tacheDTO.getIdequipement())
+                .orElseThrow(ResourceNotFoundException::new);
+
+        // Set the fields from the TacheDTO to the existing Tache
+        existingTache.setDescription(tacheDTO.getDescription());
+        existingTache.setDate(tacheDTO.getDate());
+        existingTache.setStatutTache(tacheDTO.getStatutTache());
+        existingTache.setEquipement(equipement);  // Set the fetched Equipement entity
+
+        // Save the updated Tache entity
+        return tacheRepository.save(existingTache);
     }
+
 
 
     public void deleteTache(Long idtache) {

@@ -25,7 +25,7 @@ public class RendezVous {
     private Long idRendezVous;
     private Date date;
     private Time heure;
-    private String Lieu;
+    private String lieu;
 
 
     @Enumerated(EnumType.STRING)

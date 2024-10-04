@@ -1,0 +1,62 @@
+<body>
+
+    <div class="dashboard-container">
+        <a href="/dashboard" class="logo">Dashboard</a>
+    
+        <main class="content">
+            <div class="rendezvous-list-container">
+                <h2>Liste des Rendez-vous</h2>
+                <div class="add-rendezvous-button">
+                    <a routerLink="/rendezvous/add" class="btn btn-primary">Ajouter un Nouveau Rendez-vous</a>
+                </div>
+    
+                <div class="search-container">
+                    <input
+                        type="text"
+                        placeholder="Rechercher par lieu ou date"
+                        [(ngModel)]="searchTerm"
+                        (input)="searchRendezVous()"
+                        class="form-control"
+                    />
+                </div>
+    
+                <div *ngIf="rendezVous !== undefined && rendezVous.length > 0">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Date</th>
+                                <th scope="col">Heure</th>
+                                <th scope="col">Lieu</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Client ID</th>
+                                <th scope="col">Jardinier ID</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let rdv of filteredRendezVous">
+                                <td data-label="Date">{{ rdv.date | date:'shortDate' }}</td>
+                                <td data-label="Heure">{{ rdv.heure }}</td>
+                                <td data-label="Lieu">{{ rdv.lieu }}</td>
+                                <td data-label="Status">{{ rdv.statutRendezVous}}</td>
+                                <td data-label="Client ID">{{ rdv.idclient }}</td>
+                                <td data-label="Jardinier ID">{{ rdv.idjardinier }}</td>
+                                <td data-label="Actions">
+                                    <button class="btn btn-danger" (click)="deleteRendezVous(rdv.idRendezVous)">Supprimer</button>
+                                    <button class="btn btn-warning" (click)="editRendezVous(rdv.idRendezVous)">Modifier</button>
+                                    <button class="btn btn-warning" (click)="details(rdv.idRendezVous)">Détails</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+    
+                <div *ngIf="filteredRendezVous.length === 0" class="no-rendezvous-container">
+                    <p>Aucun rendez-vous disponible.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    </body>
+    
