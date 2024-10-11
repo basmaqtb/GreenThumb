@@ -1,4 +1,12 @@
 /* equipement-list.component.css */
+.logo{
+  font-size: 1.5em;
+  font-weight: lighter;
+  color: #2c8f2b;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 20px;
+}
 
 .equipement-list-container {
     padding: 20px;

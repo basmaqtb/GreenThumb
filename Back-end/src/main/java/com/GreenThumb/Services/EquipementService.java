@@ -44,8 +44,8 @@ public class EquipementService {
 
         existingEquipement.setType(equipementDTO.getType());
         existingEquipement.setMarque(equipementDTO.getMarque());
-        existingEquipement.setModel(equipementDTO.getModel());  // Include other fields as needed
-        existingEquipement.setEtat(equipementDTO.getEtat());    // Include other fields as needed
+        existingEquipement.setModel(equipementDTO.getModel());
+        existingEquipement.setEtat(equipementDTO.getEtat());
 
         return equipementRepository.save(existingEquipement);
     }

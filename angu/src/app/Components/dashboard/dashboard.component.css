@@ -1,0 +1,62 @@
+/* Styles globaux */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+  display: flex; /* Ajouté pour flexbox */
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px; /* Largeur de la sidebar */
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  position: sticky; /* Rester en haut lors du défilement */
+  height: 100vh; /* Hauteur de la sidebar */
+}
+
+.sidebar .logo {
+  font-size: 1.5em;
+  font-weight: lighter;
+  color: #2c8f2b;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 20px; /* Espacement entre le logo et les liens */
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column; /* Pour aligner les liens verticalement */
+}
+
+.sidebar nav a {
+  text-decoration: none;
+  color: #333;
+  margin: 10px 0; /* Espacement entre les liens */
+  font-weight:lighter;
+  padding: 10px;
+  border-radius: 5px; /* Coins arrondis pour les liens */
+}
+
+.sidebar nav a:hover {
+  background-color: #f0f0f0; /* Changement de fond au survol */
+  color: #2c8f2b;
+
+}
+
+
+/* Contenu principal */
+.content {
+  flex: 1; /* Prendre tout l'espace restant */
+  padding: 20px; /* Espacement autour du contenu */
+}
+
+/* Ajoutez vos autres styles ici */

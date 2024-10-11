@@ -31,6 +31,15 @@ body {
     border-radius: 4px; /* Round the corners of the links */
     transition: background-color 0.3s; /* Smooth transition for hover effect */
 }
+.navbar-brand{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #2c8f2b;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 20px;
+
+}
 
 .nav-link:hover {
     background-color: rgba(255, 255, 255, 0.1); /* Lighten background on hover */
