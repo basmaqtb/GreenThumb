@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -57,6 +58,16 @@ public class RendezVousController {
     public ResponseEntity<List<RendezVousDTO>> getRendezVousByJardinier(@PathVariable("idJardinier") Long idJardinier) {
         List<RendezVousDTO> rendezVousDTOList = rendezVousService.getRendezVousByJardinier(idJardinier);
         return ResponseEntity.ok(rendezVousDTOList);
+    }
+
+    public ResponseEntity<List<RendezVousDTO>> getRendezVousByClient(Principal principal) {
+        try {
+            // Fetch rendezvous for the authenticated client
+            List<RendezVousDTO> rendezVousDTOList = rendezVousService.getRendezVousByClient(principal);
+            return ResponseEntity.ok(rendezVousDTOList);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
+        }
     }
 
     // PUT update rendezvous

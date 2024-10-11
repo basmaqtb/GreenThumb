@@ -18,7 +18,10 @@ import com.GreenThumb.Repositories.TacheRepository;
 import com.GreenThumb.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
+
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -92,6 +95,23 @@ public class RendezVousService {
                 .map(rendezVousMapper::toDto)
                 .collect(Collectors.toList());
     }
+
+
+    public List<RendezVousDTO> getRendezVousByClient(Principal principal) {
+        User authenticatedUser = userRepository.findByUsername(principal.getName())
+                .orElseThrow(() -> new RuntimeException("Authenticated user not found"));
+
+        // Check if the user has the role of Client
+        if (!authenticatedUser.getRole().equals(Role.Client)) {
+            throw new RuntimeException("Access denied: You can only access your own appointments.");
+        }
+
+        List<RendezVous> rendezVousList = rendezVousRepository.findByClient(authenticatedUser);
+        return rendezVousList.stream()
+                .map(rendezVousMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
 
     // Récupérer tous les rendez-vous
     public List<RendezVous> getAllRendezVous() {
