@@ -1,0 +1,83 @@
+.add-rendezvous-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.add-rendezvous-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.add-rendezvous-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-rendezvous-container form div {
+  margin-bottom: 15px;
+}
+
+.add-rendezvous-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+.add-rendezvous-container input, .add-rendezvous-container select {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.add-rendezvous-container input[type="time"], 
+.add-rendezvous-container input[type="date"] {
+  max-width: 200px;
+}
+
+.add-rendezvous-container input:focus, .add-rendezvous-container select:focus {
+  border-color: #66afe9;
+  outline: none;
+}
+
+.add-rendezvous-container button {
+  padding: 10px;
+  font-size: 18px;
+  color: white;
+  background-color: #28a745;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.add-rendezvous-container button[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.add-rendezvous-container button:hover:not([disabled]) {
+  background-color: #218838;
+}
+
+.add-rendezvous-container div.ng-invalid.ng-touched {
+  border-color: red;
+}
+
+.add-rendezvous-container .ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+.add-rendezvous-container .error-message {
+  color: red;
+  font-size: 14px;
+}

@@ -5,6 +5,7 @@ import com.GreenThumb.Models.Enums.StatutRendezVous;
 import com.GreenThumb.Models.Tache;
 import com.GreenThumb.Models.heritage.Client;
 import com.GreenThumb.Models.heritage.Jardinier;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,8 @@ import java.util.Date;
 public class RendezVousDTO {
     private Long idRendezVous;
     private Date date;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private Time heure;
     private String lieu;
     private StatutRendezVous statutRendezVous;

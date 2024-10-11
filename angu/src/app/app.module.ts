@@ -13,7 +13,10 @@ import { AllEquipementComponent } from './Components/all-equipement/all-equipeme
 import { AllTachesComponent } from './Components/all-taches/all-taches.component';
 import { AddTacheComponent } from './Components/add-tache/add-tache.component';
 import { AllRendezvousComponent } from './Components/all-rendezvous/all-rendezvous.component';
-import { AddRendezvousComponent } from './Components/add-rendezvous/add-rendezvous.component';
+import { AddrendezVousComponent } from './Components/addrendez-vous/addrendez-vous.component';
+import { AllUsersComponent } from './Components/all-users/all-users.component';
+import { AddUserComponent } from './Components/add-user/add-user.component';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +28,9 @@ import { AddRendezvousComponent } from './Components/add-rendezvous/add-rendezvo
     AllTachesComponent,
     AddTacheComponent,
     AllRendezvousComponent,
-    AddRendezvousComponent  
+    AddrendezVousComponent,
+    AllUsersComponent,
+    AddUserComponent 
   ],
   imports: [
     BrowserModule,

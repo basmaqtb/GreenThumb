@@ -1,0 +1,41 @@
+<div class="user-list-container">
+    <h2>User List</h2>
+    <a href="/dashboard" class="logo">Dashboard</a>
+  
+    <div class="add-user-button">
+      <a routerLink="/users/add" class="btn btn-primary">Add New User</a>
+    </div>
+  
+    <div *ngIf="users !== undefined && users.length > 0">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Role</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of filteredUsers">
+            <td data-label="Full Name">{{ user.id }}</td>
+            <td data-label="Full Name">{{ user.fullName }}</td>
+            <td data-label="Email">{{ user.email }}</td>
+            <td data-label="Phone">{{ user.phone }}</td>
+            <td data-label="Role">{{ user.role }}</td>
+            <td data-label="Actions">
+                <button class="btn btn-danger" (click)="deleteUser(user.id)">Delete</button>
+                <button class="btn btn-warning" (click)="editUser(user.id)">Edit</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div *ngIf="filteredUsers.length === 0" class="no-user-container">
+      <p>No users available.</p>
+    </div>
+  </div>
+  
