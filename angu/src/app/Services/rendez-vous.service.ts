@@ -41,6 +41,18 @@ export class RendezVousService {
     return this.http.delete<void>(`${this.apiUrl}/delete/${id}`, { headers });
   }
 
+    // Get all rendezvous By Client
+  getRendezVousByClient(clientId: number): Observable<RendezVous[]> {
+    const headers = this.createAuthorizationHeader();
+    return this.http.get<RendezVous[]>(`${this.apiUrl}/client/${clientId}`);
+  }
+
+    // Get all rendezvous By Client
+    getRendezVousByJardinier(jardinierId: number): Observable<RendezVous[]> {
+      const headers = this.createAuthorizationHeader();
+      return this.http.get<RendezVous[]>(`${this.apiUrl}/jardinier/${jardinierId}`);
+    }
+
   // Helper method to add JWT authorization to the headers
   private createAuthorizationHeader(): HttpHeaders | undefined {
     const jwtToken = localStorage.getItem('jwt'); // Retrieve JWT token from localStorage

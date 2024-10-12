@@ -53,6 +53,7 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .role(user.getRole().name())  // Include the user's role
+                .id(String.valueOf(user.getId())) // Convert Long ID to String
                 .build();
     }
 }
