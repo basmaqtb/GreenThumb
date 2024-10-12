@@ -17,16 +17,22 @@ import com.GreenThumb.Repositories.RendezVousRepository;
 import com.GreenThumb.Repositories.TacheRepository;
 import com.GreenThumb.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 
 
+import java.nio.file.AccessDeniedException;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class RendezVousService {
+
 
     @Autowired
     private RendezVousRepository rendezVousRepository;
@@ -54,7 +60,7 @@ public class RendezVousService {
 
         Role role = Role.Client;
 
-        User client = userRepository.findByRoleAndId(role,idclient)
+        User client = userRepository.findByRoleAndId(role, idclient)
                 .orElseThrow(() -> new RuntimeException("client not found"));
 
         RendezVous rendezVous = rendezVousMapper.toEntity(rendezVousDTO);
@@ -83,34 +89,6 @@ public class RendezVousService {
         return rendezVousMapper.toDto(saved);
     }
 
-
-    // Récupérer les rendez-vous par jardinier
-    public List<RendezVousDTO> getRendezVousByJardinier(Long idJardinier) {
-        Jardinier jardinier = jardinierRepository.findById(idJardinier)
-                .orElseThrow(() -> new RuntimeException("Jardinier not found"));
-
-        List<RendezVous> rendezVousList = rendezVousRepository.findByJardinier(jardinier);
-
-        return rendezVousList.stream()
-                .map(rendezVousMapper::toDto)
-                .collect(Collectors.toList());
-    }
-
-
-    public List<RendezVousDTO> getRendezVousByClient(Principal principal) {
-        User authenticatedUser = userRepository.findByUsername(principal.getName())
-                .orElseThrow(() -> new RuntimeException("Authenticated user not found"));
-
-        // Check if the user has the role of Client
-        if (!authenticatedUser.getRole().equals(Role.Client)) {
-            throw new RuntimeException("Access denied: You can only access your own appointments.");
-        }
-
-        List<RendezVous> rendezVousList = rendezVousRepository.findByClient(authenticatedUser);
-        return rendezVousList.stream()
-                .map(rendezVousMapper::toDto)
-                .collect(Collectors.toList());
-    }
 
 
     // Récupérer tous les rendez-vous
@@ -142,4 +120,42 @@ public class RendezVousService {
                 .orElseThrow(RendezVousNotFoundException::new);
         rendezVousRepository.delete(rendezVous);
     }
+
+
+
+    // Get all rendez-vous by client ID
+    public List<RendezVousDTO> getAllRendezVousByClient(Long clientId) {
+
+        User client = userRepository.findByRoleAndId(Role.Client, clientId)
+                .orElseThrow(() -> new RuntimeException("Client not found"));
+
+        List<RendezVous> rendezVousList = rendezVousRepository.findByClient(client);
+
+        // Check if there are any rendez-vous for the client
+        if (rendezVousList.isEmpty()) {
+            throw new ResourceNotFoundException();
+        }
+
+        return rendezVousList.stream()
+                .map(rendezVousMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    public List<RendezVousDTO> getRendezVousByJardinier(Long jardinierId) {
+
+        User jardinier = userRepository.findByRoleAndId(Role.Jardinier, jardinierId)
+                .orElseThrow(() -> new RuntimeException("Jardinier not found"));
+
+        List<RendezVous> rendezVousList = rendezVousRepository.findByJardinier(jardinier);
+
+        if (rendezVousList.isEmpty()) {
+            throw new ResourceNotFoundException();
+        }
+
+        return rendezVousList.stream()
+                .map(rendezVousMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+
 }

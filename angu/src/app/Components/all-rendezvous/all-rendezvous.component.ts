@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RendezVousService } from '../../Services/rendez-vous.service'; // Adjust the path if necessary
 import { RendezVous } from '../../Modules/RendezVous'; // Adjust the path if necessary
+import { AuthenticationService } from '../../Services/auth.service'; // Import the AuthService to access user info
 import { Time } from '@angular/common';
 
 @Component({
@@ -13,28 +14,63 @@ export class AllRendezvousComponent implements OnInit {
   rendezVous: RendezVous[] = [];
   filteredRendezVous: RendezVous[] = [];
   searchTerm: string = '';
+  userRole: string = ''; // To hold the user's role
+  userId: number = 0; // To hold the user's ID
 
-  constructor(private rendezVousService: RendezVousService, private router: Router) {}
+  constructor(private rendezVousService: RendezVousService, private router: Router, private authService: AuthenticationService) {}
 
   ngOnInit(): void {
+    this.loadUserInfo();
     this.loadRendezVous();
   }
 
- 
+  loadUserInfo(): void {
+    const user = this.authService.getCurrentUser(); // Fetch user info
+    if (user) {
+      this.userRole = user.role; // Set role
+      this.userId = user.id;     // Set ID
+    } else {
+      console.error('No user is logged in or user data is missing.');
+      // Optionally, you can redirect to the login page or show a message to the user
+      this.router.navigate(['/login']); // Redirect to login if needed
+    }
+  }
 
-
-  // Load all rendezvous from the service
+  // Load rendezvous based on user role
   loadRendezVous(): void {
-    this.rendezVousService.getAllRendezVous().subscribe(
-      (data) => {
-        this.rendezVous = data;
-        console.log(data);
-        this.filteredRendezVous = data;
-      },
-      (error) => {
-        console.error('Error fetching rendezvous', error);
-      }
-    );
+    if (this.userRole === 'CLIENT') {
+      this.rendezVousService.getRendezVousByClient(this.userId).subscribe(
+        (data) => {
+          this.rendezVous = data;
+          this.filteredRendezVous = data;
+        },
+        (error) => {
+          console.error('Error fetching client rendezvous', error);
+        }
+      );
+    } else if (this.userRole === 'JARDINIER') {
+      this.rendezVousService.getRendezVousByJardinier(this.userId).subscribe(
+        (data) => {
+          this.rendezVous = data;
+          this.filteredRendezVous = data;
+        },
+        (error) => {
+          console.error('Error fetching jardinier rendezvous', error);
+        }
+      );
+    } else if (this.userRole === 'ADMIN') {
+      this.rendezVousService.getAllRendezVous().subscribe( // Assuming you have this method implemented
+        (data) => {
+          this.rendezVous = data;
+          this.filteredRendezVous = data;
+        },
+        (error) => {
+          console.error('Error fetching all rendezvous', error);
+        }
+      );
+    } else {
+      console.error('Invalid user role');
+    }
   }
 
   // Delete a rendezvous by ID

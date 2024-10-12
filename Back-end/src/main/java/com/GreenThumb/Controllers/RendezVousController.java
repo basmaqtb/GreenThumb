@@ -8,8 +8,10 @@ import com.GreenThumb.Services.RendezVousService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.AccessDeniedException;
 import java.security.Principal;
 import java.util.List;
 
@@ -53,22 +55,18 @@ public class RendezVousController {
         }
     }
 
-    // GET rendezvous by Jardinier ID
-    @GetMapping("/jardinier/{idJardinier}")
-    public ResponseEntity<List<RendezVousDTO>> getRendezVousByJardinier(@PathVariable("idJardinier") Long idJardinier) {
-        List<RendezVousDTO> rendezVousDTOList = rendezVousService.getRendezVousByJardinier(idJardinier);
-        return ResponseEntity.ok(rendezVousDTOList);
+    @GetMapping("/client/{clientId}")
+    public ResponseEntity<List<RendezVousDTO>> getAllRendezVousByClient(@PathVariable Long clientId) {
+        List<RendezVousDTO> rendezVousList = rendezVousService.getAllRendezVousByClient(clientId);
+        return new ResponseEntity<>(rendezVousList, HttpStatus.OK);
     }
 
-    public ResponseEntity<List<RendezVousDTO>> getRendezVousByClient(Principal principal) {
-        try {
-            // Fetch rendezvous for the authenticated client
-            List<RendezVousDTO> rendezVousDTOList = rendezVousService.getRendezVousByClient(principal);
-            return ResponseEntity.ok(rendezVousDTOList);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
-        }
+    @GetMapping("/jardinier/{jardinierId}")
+    public ResponseEntity<List<RendezVousDTO>> getRendezVousByJardinier(@PathVariable Long jardinierId) {
+        List<RendezVousDTO> rendezVousList = rendezVousService.getRendezVousByJardinier(jardinierId);
+        return new ResponseEntity<>(rendezVousList, HttpStatus.OK);
     }
+
 
     // PUT update rendezvous
     @PutMapping("/update/{id}")

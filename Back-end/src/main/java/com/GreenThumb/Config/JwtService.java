@@ -30,9 +30,14 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
+    public String extractUserId(String token) {
+        return extractClaim(token, claims -> claims.get("id", String.class)); // Add this method
+    }
+
     public String generateToken(User user) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("roles", List.of(user.getRole().name())); // Ensure "USER" is included
+        claims.put("id", user.getId()); // Add user ID to claims
         return generateToken(claims, user);
     }
 

@@ -17,4 +17,15 @@ export class AuthenticationService {
   login(credentials: any): Observable<any> {
     return this.http.post(`${this.authUrl}/login`, credentials);
   }
+
+  // New method to get current user information
+  getCurrentUser(): { role: string; id: number } | null {
+    const user = JSON.parse(localStorage.getItem('currentUser') || 'null');
+    return user; // Ensure that the user object has the 'role' and 'id' properties
+  }
+
+  // Optionally, you can add a method to check if the user is authenticated
+  isAuthenticated(): boolean {
+    return !!this.getCurrentUser(); // Returns true if a user is logged in
+  }
 }

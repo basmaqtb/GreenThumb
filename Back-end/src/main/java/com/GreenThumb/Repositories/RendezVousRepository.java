@@ -11,5 +11,4 @@ public interface RendezVousRepository extends JpaRepository<RendezVous, Long> {
     List<RendezVous> findByJardinier(User jardinier);
     List<RendezVous> findByClient(User client);
 
-
 }

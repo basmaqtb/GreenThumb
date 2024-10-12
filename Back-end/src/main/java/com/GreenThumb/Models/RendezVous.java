@@ -1,11 +1,7 @@
 package com.GreenThumb.Models;
 
-import com.GreenThumb.Models.Enums.EtatEquipement;
 import com.GreenThumb.Models.Enums.StatutRendezVous;
-import com.GreenThumb.Models.heritage.Client;
-import com.GreenThumb.Models.heritage.Jardinier;
 import com.GreenThumb.Models.heritage.User;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,8 +21,6 @@ public class RendezVous {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idRendezVous;
     private Date date;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private Time heure;
     private String lieu;
 
