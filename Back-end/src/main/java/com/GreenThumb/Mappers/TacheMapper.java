@@ -15,10 +15,8 @@ public interface TacheMapper {
 
     RendezVousMapper INSTANCE = Mappers.getMapper(RendezVousMapper.class);
 
-    @Mapping(source = "idequipement", target = "equipement.idequipement")
     Tache toEntity(TacheDTO tacheDto);
 
-    @Mapping(source = "equipement.idequipement", target = "idequipement")
     TacheDTO toDto(Tache tache);
 
     Tache partialUpdate(TacheDTO tacheDto, @MappingTarget Tache tache);

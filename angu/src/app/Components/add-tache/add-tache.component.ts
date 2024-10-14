@@ -23,11 +23,11 @@ export class AddTacheComponent implements OnInit {
   ) {
     // Initialize the form with validators
     this.tacheForm = this.fb.group({
+      nom: ['', Validators.required],
       description: ['', Validators.required],
       date: ['', Validators.required],
       statutTache: ['', Validators.required],
-      idequipement: [null, Validators.required] // Assuming this is a foreign key reference to Equipement
-    });
+        });
   }
 
   ngOnInit(): void {

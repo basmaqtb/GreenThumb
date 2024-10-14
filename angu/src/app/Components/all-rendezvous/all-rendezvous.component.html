@@ -7,7 +7,7 @@
           <h2>Liste des Rendez-vous</h2>
   
           <!-- Only show the 'Add New Rendez-vous' button for ADMIN and CLIENT roles -->
-          <div class="add-rendezvous-button" *ngIf="userRole === 'ADMIN' || userRole === 'CLIENT'">
+          <div class="add-rendezvous-button" *ngIf="userRole === 'ADMIN' || userRole === 'Client'">
             <a routerLink="/rendezvous/add" class="btn btn-primary">Ajouter un Nouveau Rendez-vous</a>
           </div>
   

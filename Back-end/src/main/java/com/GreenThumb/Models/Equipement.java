@@ -26,8 +26,9 @@ public class Equipement {
     @Enumerated(EnumType.STRING)
     private EtatEquipement etat;
 
-    @OneToMany(mappedBy = "equipement")
-    private List<Tache> taches;
+    @ManyToOne
+    @JoinColumn(name = "idtache")
+    private Tache tache ;
 
     @ManyToOne
     @JoinColumn(name = "stock_id")

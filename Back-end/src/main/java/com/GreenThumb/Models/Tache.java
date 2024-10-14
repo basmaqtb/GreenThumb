@@ -20,7 +20,7 @@ public class Tache {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idtache;
-
+    private String nom;
     private String description;
     private Date date;
 
@@ -30,7 +30,7 @@ public class Tache {
     @OneToMany(mappedBy = "tache")
     private List<RendezVous> rendezVousList;
 
-    @ManyToOne
-    @JoinColumn(name = "idequipement")
-    private Equipement equipement;
+    @OneToMany(mappedBy = "tache")
+    private List<Equipement> equipements ;
+
 }

@@ -1,6 +1,15 @@
 <div class="add-tache-container">
     <h2>{{ isEditMode ? 'Edit Tache' : 'Add Tache' }}</h2>
     <form [formGroup]="tacheForm" (ngSubmit)="onSubmit()">
+
+      <div>
+        <label for="nom">Nom</label>
+        <input id="nom" formControlName="nom" />
+        <div *ngIf="tacheForm.get('nom')?.invalid && tacheForm.get('nom')?.touched">
+          nom is required.
+        </div>
+      </div>
+
       <div>
         <label for="description">Description</label>
         <input id="description" formControlName="description" />
@@ -30,13 +39,7 @@
         </div>
       </div>
   
-      <div>
-        <label for="idequipement">Equipement ID</label>
-        <input id="idequipement" formControlName="idequipement" type="number" />
-        <div *ngIf="tacheForm.get('idequipement')?.invalid && tacheForm.get('idequipement')?.touched">
-          Equipement ID is required.
-        </div>
-      </div>
+      
   
       <button type="submit" [disabled]="tacheForm.invalid">{{ isEditMode ? 'Update Tache' : 'Add Tache' }}</button>
     </form>

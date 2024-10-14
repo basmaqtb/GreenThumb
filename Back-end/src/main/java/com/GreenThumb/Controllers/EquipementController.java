@@ -30,9 +30,9 @@ public class EquipementController {
         return ResponseEntity.ok(equipementMapper.toDto(equipements));
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<EquipementDTO> createEquipement(@RequestBody EquipementDTO equipementDTO) {
-        var createdEquipement = equipementService.createEquipment(equipementDTO);
+    @PostMapping("/add/{idtache}")
+    public ResponseEntity<EquipementDTO> createEquipement(@RequestBody EquipementDTO equipementDTO, @PathVariable("idtache") Long idtache) {
+        var createdEquipement = equipementService.createEquipment(equipementDTO, idtache);
         return ResponseEntity.status(HttpStatus.CREATED).body(equipementMapper.toDto(createdEquipement));
     }
 
@@ -63,5 +63,11 @@ public class EquipementController {
         } catch (EquipmentNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();  // Returns a 404 Not Found status if the equipment is not found
         }
+    }
+
+    @GetMapping("/tache/{idtache}")
+    public ResponseEntity<List<EquipementDTO>> getAllEquipementsByTache(@PathVariable Long idtache) {
+        List<Equipement> equipments = equipementService.getAllEquipmentsByTache(idtache);
+        return ResponseEntity.ok(equipementMapper.toDto(equipments)); // Assuming you have a method to convert list of Equipements to DTOs
     }
 }

@@ -40,21 +40,16 @@
 
     <div>
       <label for="idtache">Tache ID</label>
-      <input id="idtache" formControlName="idtache" type="number" />
+      <select id="idtache" formControlName="idtache">
+        <option value="" disabled>Select a task</option>
+        <option *ngFor="let tache of taches" [value]="tache.idtache">{{ tache.nom }}</option> <!-- Assuming 'nom' is the property to display -->
+      </select>
       <div *ngIf="rendezVousForm.get('idtache')?.invalid && rendezVousForm.get('idtache')?.touched">
         Tache ID is required.
       </div>
     </div>
 
-    <div>
-      <label for="idclient">Client ID</label>
-      <input id="idclient" formControlName="idclient" type="number" />
-      <div *ngIf="rendezVousForm.get('idclient')?.invalid && rendezVousForm.get('idclient')?.touched">
-        Client ID is required.
-      </div>
-    </div>
-
-    <div>
+    <div *ngIf="isAdmin || isJardinier"> <!-- Affiche le champ seulement si l'utilisateur est admin ou jardinier -->
       <label for="idjardinier">Jardinier ID</label>
       <input id="idjardinier" formControlName="idjardinier" type="number" />
       <div *ngIf="rendezVousForm.get('idjardinier')?.invalid && rendezVousForm.get('idjardinier')?.touched">
