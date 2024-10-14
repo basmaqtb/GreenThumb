@@ -27,17 +27,27 @@ export class LoginComponent implements OnInit {
 
   submitForm(): void {
     if (this.loginForm.invalid) {
+      console.error("Form is invalid");
       return; // Prevent submission if the form is invalid
     }
 
-    console.log(this.loginForm.value);
+    console.log('Form values:', this.loginForm.value); // Log the form values
     this.service.login(this.loginForm.value).subscribe(
       (response: Jwt) => {
+        console.log('API response:', response); // Log the API response
         const jwToken = response.token;
         const role = response.role;
-        localStorage.setItem('jwt', jwToken);
-        localStorage.setItem('role', role);
-        this.router.navigateByUrl("/dashboard");
+        const id = response.id; // Change this to match your actual API response field for ID
+
+        if (jwToken && role && id) {
+          localStorage.setItem('jwt', jwToken);
+          localStorage.setItem('role', role);
+          localStorage.setItem('id', id.toString()); // Store the user ID
+          console.log('JWT, role, and ID stored in localStorage:', { jwToken, role, id }); // Confirm storage
+          this.router.navigateByUrl("/dashboard");
+        } else {
+          console.error('Token, role, or ID is missing from the response');
+        }
       },
       (error) => {
         console.error("Login failed", error);

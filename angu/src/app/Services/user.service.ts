@@ -41,6 +41,19 @@ export class UserService {
     return this.http.delete<void>(`${this.apiUrl}/delete/${id}`, { headers });
   }
 
+  // Get all Jardinier with JWT
+  getAllJardiniers(): Observable<Utilisateur[]> {
+    const headers = this.createAuthorizationHeader();
+    return this.http.get<Utilisateur[]>(`${this.apiUrl}/jardiniers`, { headers });
+  }
+
+  // Get all Clients with JWT
+  getAllClients(): Observable<Utilisateur[]> {
+    const headers = this.createAuthorizationHeader();
+    return this.http.get<Utilisateur[]>(`${this.apiUrl}/clients`, { headers });
+  }
+
+
   // Helper method to add JWT authorization to the headers
   private createAuthorizationHeader(): HttpHeaders | undefined {
     const jwtToken = localStorage.getItem('jwt'); // Retrieve JWT token from localStorage

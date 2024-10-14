@@ -10,7 +10,7 @@ import { AuthenticationService } from '../../Services/auth.service';
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup; // Declare the FormGroup for registration
-  role: string = 'CLIENT'; // Default role (can be set to other values)
+  role: string = 'CLient'; // Default role (can be set to other values)
 
   constructor(
     private authService: AuthenticationService,
@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     // Initialize the form with validation
     this.registerForm = this.fb.group({
-      fullname: ['', [Validators.required]], // Validate full name is required
+      fullName: ['', [Validators.required]], // Validate full name is required
       email: ['', [Validators.required, Validators.email]], // Validate email
       password: ['', [Validators.required, Validators.minLength(6)]], // Validate password is required and has a minimum length
       phone: ['', [Validators.required]], // Validate phone is required

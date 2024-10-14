@@ -19,7 +19,7 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    private static final String SECRET_KEY = "E0ll5azxDvxi9pq8hl95AK864DIV2V143m7aVgIzcHbROKTsZMq2U0SZdgnnkFUU\n";
+    private static final String SECRET_KEY = "E0ll5azxDvxi9pq8hl95AK864DIV2V143m7aVgIzcHbROKTsZMq2U0SZdgnnkFUU";
 
     public String extractUserEmail(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -30,8 +30,8 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
-    public String extractUserId(String token) {
-        return extractClaim(token, claims -> claims.get("id", String.class)); // Add this method
+    public Integer extractUserId(String token) {
+        return extractClaim(token, claims -> claims.get("id", Integer.class)); // Change to Integer
     }
 
     public String generateToken(User user) {
@@ -40,7 +40,6 @@ public class JwtService {
         claims.put("id", user.getId()); // Add user ID to claims
         return generateToken(claims, user);
     }
-
 
     public String generateToken(Map<String, Object> claims, User user) {
         return Jwts
@@ -62,7 +61,6 @@ public class JwtService {
         Claims claims = extractAllClaims(token);
         return claims.get("roles", List.class); // Ensure roles are extracted correctly
     }
-
 
     private boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
