@@ -3,6 +3,7 @@ package com.GreenThumb.Service;
 import com.GreenThumb.DTO.UserDTO;
 import com.GreenThumb.Exceptions.ResourceNotFoundException;
 import com.GreenThumb.Mappers.UserMapper;
+import com.GreenThumb.Models.Enums.Role;
 import com.GreenThumb.Models.heritage.User;
 import com.GreenThumb.Repositories.UserRepository;
 import com.GreenThumb.Services.UserService;
@@ -115,19 +116,19 @@ class UserServiceTest {
         verify(userRepository, times(1)).delete(user);
     }
 
-//    @Test
-//    void testGetByRole() {
-//        // Arrange
-//        String role = "ADMIN";
-//        User user1 = new User();
-//        User user2 = new User();
-//        when(userRepository.findByRole(role)).thenReturn(List.of(user1, user2));
-//
-//        // Act
-//        List<User> usersByRole = userService.getByRole(role);
-//
-//        // Assert
-//        assertNotNull(usersByRole);
-//        assertEquals(2, usersByRole.size());
-//    }
+    @Test
+    void testGetByRole() {
+        // Arrange
+        Role role = Role.ADMIN; // Use the enum for role
+        User user1 = new User();
+        User user2 = new User();
+        when(userRepository.findByRole(role)).thenReturn(List.of(user1, user2));
+
+        // Act
+        List<User> usersByRole = userService.getByRole(role);
+
+        // Assert
+        assertNotNull(usersByRole);
+        assertEquals(2, usersByRole.size());
+    }
 }

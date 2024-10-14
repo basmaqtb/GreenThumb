@@ -72,4 +72,6 @@ public class EquipementService {
         var equipment = equipementRepository.findById(idequipement).orElseThrow(EquipmentNotFoundException::new);
         equipementRepository.delete(equipment);
     }
+
+
 }

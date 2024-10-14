@@ -1,64 +1,56 @@
-/* Global Styles */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
+.header {
+    background-color: #fff;
+    box-shadow: 2px 6px 42px 10px #e4e4e4;
+    display: flex;
+    width: 100%;
+    gap: 2px;
+    overflow: hidden;
+    color: #000;
+    /* letter-spacing: 1.5px; */
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 32px 80px 0 0;
+    font: 20px/2 Actor, sans-serif;
+  }
+  @media (max-width: 991px) {
+    .header {
+      max-width: 100%;
+      padding-right: 20px;
+    }
+  }
+  .logo {
+    aspect-ratio: 3.88;
+    object-fit: contain;
+    object-position: center;
+    width: 200px; /* Set a fixed width, adjust this value as needed */
+    height: auto; /* Maintain aspect ratio */
+  }
 
-/* Navbar Styles */
-.navbar {
-    padding: 1rem; /* Add padding for a better look */
-}
-
-.navbar-brand {
-    font-size: 1.5rem; /* Increase font size of the brand */
-}
-
-.navbar ul {
-    list-style: none; /* Remove default list styles */
-    padding: 0; /* Remove default padding */
-    margin: 0; /* Remove default margin */
-    display: flex; /* Display list items in a row */
-}
-
-.navbar li {
-    margin-left: 1rem; /* Space between nav items */
-}
-
-.nav-link {
-    color: #ffffff; /* Change link color to white */
-    text-decoration: none; /* Remove underline from links */
-    padding: 0.5rem 1rem; /* Add padding for links */
-    border-radius: 4px; /* Round the corners of the links */
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
-}
-.navbar-brand{
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #2c8f2b;
+  @media (max-width: 991px) {
+    .logo {
+      width: 100px; /* Reduce size on smaller screens */
+    }
+  }
+  
+  @media (max-width: 991px) {
+    .logo {
+      max-width: 100%;
+    }
+  }
+  .navigation {
+    display: flex;
+    gap: 40px 50px;
+    flex-wrap: wrap;
+    margin: auto 0;
+  }
+  @media (max-width: 991px) {
+    .navigation {
+      max-width: 100%;
+    }
+  }
+  .nav-link {
+    flex-basis: auto;
+    color: inherit;
     text-decoration: none;
-    display: block;
-    margin-bottom: 20px;
-
-}
-
-.nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.1); /* Lighten background on hover */
-}
-
-/* Router Outlet Styles */
-router-outlet {
-    display: block; /* Ensures router outlet takes space */
-    padding: 1rem; /* Add padding around router outlet */
-}
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-    .navbar ul {
-        flex-direction: column; /* Stack items vertically on smaller screens */
-        align-items: center; /* Center items */
-    }
-
-    .navbar li {
-        margin: 0.5rem 0; /* Space between items */
-    }
-}
+    margin-bottom: 10px;
+  }
