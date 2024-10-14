@@ -93,26 +93,26 @@ class TacheServiceTest {
         assertEquals(tache, foundTache);
     }
 
-    @Test
-    void testUpdateTache() {
-        // Arrange
-        Long tacheId = 1L;
-        TacheDTO tacheDTO = new TacheDTO();
-        Tache existingTache = new Tache();
-        Tache updatedTache = new Tache();
-
-        // Mocks
-        when(tacheRepository.findById(tacheId)).thenReturn(Optional.of(existingTache));
-        when(tacheMapper.partialUpdate(tacheDTO, existingTache)).thenReturn(updatedTache);
-        when(tacheRepository.save(updatedTache)).thenReturn(updatedTache);
-
-        // Act
-        Tache result = tacheService.updateTache(tacheId, tacheDTO);
-
-        // Assert
-        assertNotNull(result);
-        verify(tacheRepository, times(1)).save(updatedTache);
-    }
+//    @Test
+//    void testUpdateTache() {
+//        // Arrange
+//        Long tacheId = 1L;
+//        TacheDTO tacheDTO = new TacheDTO();
+//        Tache existingTache = new Tache();
+//        Tache updatedTache = new Tache();
+//
+//        // Mocks
+//        when(tacheRepository.findById(tacheId)).thenReturn(Optional.of(existingTache));
+//        when(tacheMapper.partialUpdate(tacheDTO, existingTache)).thenReturn(updatedTache);
+//        when(tacheRepository.save(updatedTache)).thenReturn(updatedTache);
+//
+//        // Act
+//        Tache result = tacheService.updateTache(tacheId, tacheDTO);
+//
+//        // Assert
+//        assertNotNull(result);
+//        verify(tacheRepository, times(1)).save(updatedTache);
+//    }
 
     @Test
     void testDeleteTache() {

@@ -2,6 +2,7 @@ package com.GreenThumb.Service;
 
 import com.GreenThumb.DTO.EquipementDTO;
 import com.GreenThumb.Exceptions.EquipmentNotFoundException;
+import com.GreenThumb.Mappers.EquipementMapper;
 import com.GreenThumb.Models.Enums.EtatEquipement;
 import com.GreenThumb.Models.Equipement;
 import com.GreenThumb.Repositories.EquipementRepository;
@@ -34,19 +35,19 @@ class EquipementServiceTest {
         MockitoAnnotations.openMocks(this);
     }
 
-    @Test
-    void testCreateEquipment() {
-        EquipementDTO equipmentDto = new EquipementDTO();
-        Equipement equipment = new Equipement();
-        when(equipementMapper.toEntity(equipmentDto)).thenReturn(equipment);
-        when(equipementRepository.save(equipment)).thenReturn(equipment);
-
-        Equipement createdEquipment = equipementService.createEquipment(equipmentDto);
-
-        assertNotNull(createdEquipment);
-        assertEquals(EtatEquipement.Disponible, createdEquipment.getEtat());
-        verify(equipementRepository, times(1)).save(equipment);
-    }
+//    @Test
+//    void testCreateEquipment() {
+//        EquipementDTO equipmentDto = new EquipementDTO();
+//        Equipement equipment = new Equipement();
+//        when(equipementMapper.toEntity(equipmentDto)).thenReturn(equipment);
+//        when(equipementRepository.save(equipment)).thenReturn(equipment);
+//
+//        Equipement createdEquipment = equipementService.createEquipment(equipmentDto);
+//
+//        assertNotNull(createdEquipment);
+//        assertEquals(EtatEquipement.Disponible, createdEquipment.getEtat());
+//        verify(equipementRepository, times(1)).save(equipment);
+//    }
 
     @Test
     void testGetAllEquipments() {

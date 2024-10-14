@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  greenthumb-db:
+    image: mysql
+    container_name: greenthumb-db
+    restart: always
+    environment:
+      - MYSQL_DATABASE=greenthumb
+      - MYSQL_ROOT_PASSWORD=123.Niko  # Set the root password
+    ports:
+      - '3307:3306'
+
+  greenthumb:
+    container_name: greenthumb-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8088:8088'
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://greenthumb-db:3306/greenthumb
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=123.Niko
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    depends_on:
+      - greenthumb-db
