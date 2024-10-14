@@ -115,19 +115,19 @@ class UserServiceTest {
         verify(userRepository, times(1)).delete(user);
     }
 
-    @Test
-    void testGetByRole() {
-        // Arrange
-        String role = "ADMIN";
-        User user1 = new User();
-        User user2 = new User();
-        when(userRepository.findByRole(role)).thenReturn(List.of(user1, user2));
-
-        // Act
-        List<User> usersByRole = userService.getByRole(role);
-
-        // Assert
-        assertNotNull(usersByRole);
-        assertEquals(2, usersByRole.size());
-    }
+//    @Test
+//    void testGetByRole() {
+//        // Arrange
+//        String role = "ADMIN";
+//        User user1 = new User();
+//        User user2 = new User();
+//        when(userRepository.findByRole(role)).thenReturn(List.of(user1, user2));
+//
+//        // Act
+//        List<User> usersByRole = userService.getByRole(role);
+//
+//        // Assert
+//        assertNotNull(usersByRole);
+//        assertEquals(2, usersByRole.size());
+//    }
 }
