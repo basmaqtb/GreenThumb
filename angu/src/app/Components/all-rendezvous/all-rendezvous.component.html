@@ -1,62 +1,80 @@
 <body>
-
     <div class="dashboard-container">
-        <a href="/dashboard" class="logo">Dashboard</a>
-    
-        <main class="content">
-            <div class="rendezvous-list-container">
-                <h2>Liste des Rendez-vous</h2>
-                <div class="add-rendezvous-button">
-                    <a routerLink="/rendezvous/add" class="btn btn-primary">Ajouter un Nouveau Rendez-vous</a>
-                </div>
-    
-                <div class="search-container">
-                    <input
-                        type="text"
-                        placeholder="Rechercher par lieu ou date"
-                        [(ngModel)]="searchTerm"
-                        (input)="searchRendezVous()"
-                        class="form-control"
-                    />
-                </div>
-    
-                <div *ngIf="rendezVous !== undefined && rendezVous.length > 0">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Date</th>
-                                <th scope="col">Heure</th>
-                                <th scope="col">Lieu</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Client ID</th>
-                                <th scope="col">Jardinier ID</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let rdv of filteredRendezVous">
-                                <td data-label="Date">{{ rdv.date | date:'shortDate' }}</td>
-                                <td data-label="Heure">{{ rdv.heure }}</td>
-                                <td data-label="Lieu">{{ rdv.lieu }}</td>
-                                <td data-label="Status">{{ rdv.statutRendezVous}}</td>
-                                <td data-label="Client ID">{{ rdv.idclient }}</td>
-                                <td data-label="Jardinier ID">{{ rdv.idjardinier }}</td>
-                                <td data-label="Actions">
-                                    <button class="btn btn-danger" (click)="deleteRendezVous(rdv.idRendezVous)">Supprimer</button>
-                                    <button class="btn btn-warning" (click)="editRendezVous(rdv.idRendezVous)">Modifier</button>
-                                    <button class="btn btn-warning" (click)="details(rdv.idRendezVous)">Détails</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-    
-                <div *ngIf="filteredRendezVous.length === 0" class="no-rendezvous-container">
-                    <p>Aucun rendez-vous disponible.</p>
-                </div>
-            </div>
-        </main>
+      <a href="/dashboard" class="logo">Dashboard</a>
+  
+      <main class="content">
+        <div class="rendezvous-list-container">
+          <h2>Liste des Rendez-vous</h2>
+  
+          <!-- Only show the 'Add New Rendez-vous' button for ADMIN and CLIENT roles -->
+          <div class="add-rendezvous-button" *ngIf="userRole === 'ADMIN' || userRole === 'CLIENT'">
+            <a routerLink="/rendezvous/add" class="btn btn-primary">Ajouter un Nouveau Rendez-vous</a>
+          </div>
+  
+          <!-- Search bar for filtering rendezvous -->
+          <div class="search-container">
+            <input
+              type="text"
+              placeholder="Rechercher par lieu ou date"
+              [(ngModel)]="searchTerm"
+              (input)="searchRendezVous()"
+              class="form-control"
+            />
+          </div>
+  
+          <!-- Rendez-vous table -->
+          <div *ngIf="rendezVous !== undefined && rendezVous.length > 0">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Heure</th>
+                  <th scope="col">Lieu</th>
+                  <th scope="col">Statut</th>
+                  <th scope="col">Client ID</th>
+                  <th scope="col">Jardinier ID</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let rdv of filteredRendezVous">
+                  <td data-label="Date">{{ rdv.date | date:'shortDate' }}</td>
+                  <td data-label="Heure">{{ rdv.heure }}</td>
+                  <td data-label="Lieu">{{ rdv.lieu }}</td>
+                  <td data-label="Statut">{{ rdv.statutRendezVous }}</td>
+                  <td data-label="Client ID">{{ rdv.idclient }}</td>
+                  <td data-label="Jardinier ID">{{ rdv.idjardinier }}</td>
+                  <td data-label="Actions">
+                    <button class="btn btn-warning" (click)="details(rdv.idRendezVous)">Détails</button>
+  
+                    <!-- Show Edit and Delete buttons only for ADMIN or JARDINIER -->
+                    <button class="btn btn-warning" *ngIf="userRole === 'ADMIN' || userRole === 'JARDINIER'" (click)="editRendezVous(rdv.idRendezVous)">
+                      Modifier
+                    </button>
+                    <button class="btn btn-danger" *ngIf="userRole === 'ADMIN' || userRole === 'JARDINIER'" (click)="deleteRendezVous(rdv.idRendezVous)">
+                      Supprimer
+                    </button>
+
+                    <button class="btn btn-info" *ngIf="userRole === 'ADMIN'" (click)="assignJardinier(rdv.idRendezVous)">
+                      Assigner
+                  </button>
+
+                  <!-- Dropdown for selecting Jardinier -->
+                  <select *ngIf="userRole === 'ADMIN'" [(ngModel)]="selectedJardinierId" class="form-select">
+                      <option *ngFor="let jardinier of jardiniers" [value]="jardinier.id">{{ jardinier.fullName }}</option>
+                  </select>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+  
+          <!-- No Rendez-vous available message -->
+          <div *ngIf="filteredRendezVous.length === 0" class="no-rendezvous-container">
+            <p>Aucun rendez-vous disponible.</p>
+          </div>
+        </div>
+      </main>
     </div>
-    
-    </body>
-    
+  </body>
+  

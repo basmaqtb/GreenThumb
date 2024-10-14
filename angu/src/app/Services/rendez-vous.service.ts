@@ -41,17 +41,23 @@ export class RendezVousService {
     return this.http.delete<void>(`${this.apiUrl}/delete/${id}`, { headers });
   }
 
-    // Get all rendezvous By Client
+  // Get all rendezvous by Client with JWT
   getRendezVousByClient(clientId: number): Observable<RendezVous[]> {
     const headers = this.createAuthorizationHeader();
-    return this.http.get<RendezVous[]>(`${this.apiUrl}/client/${clientId}`);
+    return this.http.get<RendezVous[]>(`${this.apiUrl}/client/${clientId}`, { headers }); // Add headers here
   }
 
-    // Get all rendezvous By Client
-    getRendezVousByJardinier(jardinierId: number): Observable<RendezVous[]> {
-      const headers = this.createAuthorizationHeader();
-      return this.http.get<RendezVous[]>(`${this.apiUrl}/jardinier/${jardinierId}`);
-    }
+  // Get all rendezvous by Jardinier with JWT
+  getRendezVousByJardinier(jardinierId: number): Observable<RendezVous[]> {
+    const headers = this.createAuthorizationHeader();
+    return this.http.get<RendezVous[]>(`${this.apiUrl}/jardinier/${jardinierId}`, { headers }); // Add headers here
+  }
+
+  // Assign a Jardinier to a RendezVous
+  assignJardinierToRendezVous(rendezVousId: number, jardinierId: number): Observable<RendezVous> {
+    const headers = this.createAuthorizationHeader();
+    return this.http.put<RendezVous>(`${this.apiUrl}/attribuer/${rendezVousId}/${jardinierId}`, {}, { headers });
+  }
 
   // Helper method to add JWT authorization to the headers
   private createAuthorizationHeader(): HttpHeaders | undefined {

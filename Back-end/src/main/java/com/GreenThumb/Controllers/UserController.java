@@ -3,6 +3,7 @@ package com.GreenThumb.Controllers;
 import com.GreenThumb.DTO.UserDTO; // Changed to UserDTO
 import com.GreenThumb.Exceptions.ResourceNotFoundException;
 import com.GreenThumb.Mappers.UserMapper; // Changed to UserMapper
+import com.GreenThumb.Models.Enums.Role;
 import com.GreenThumb.Models.heritage.User; // Changed to User
 import com.GreenThumb.Services.UserService; // Changed to UserService
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,8 +65,21 @@ public class UserController {
 
     // New method to get users by role
     @GetMapping("/role/{role}")
-    public ResponseEntity<List<UserDTO>> getUsersByRole(@PathVariable String role) {
+    public ResponseEntity<List<UserDTO>> getUsersByRole(@PathVariable Role role) {
         List<User> usersByRole = userService.getByRole(role);
         return ResponseEntity.ok(userMapper.toDto(usersByRole));
+    }
+
+    @GetMapping("/jardiniers")
+    public ResponseEntity<List<UserDTO>> getAllJardiniers() {
+        List<User> jardiniers = userService.getAllJardiniers(); // Utilisation de la méthode que vous avez ajoutée
+        return ResponseEntity.ok(userMapper.toDto(jardiniers));
+    }
+
+    // New method to get all Clients
+    @GetMapping("/clients")
+    public ResponseEntity<List<UserDTO>> getAllClients() {
+        List<User> clients = userService.getAllClients(); // Utilisation de la méthode que vous avez ajoutée
+        return ResponseEntity.ok(userMapper.toDto(clients));
     }
 }

@@ -3,6 +3,7 @@ package com.GreenThumb.Services;
 import com.GreenThumb.DTO.UserDTO;
 import com.GreenThumb.Exceptions.ResourceNotFoundException;
 import com.GreenThumb.Mappers.UserMapper;
+import com.GreenThumb.Models.Enums.Role;
 import com.GreenThumb.Models.heritage.Client;
 import com.GreenThumb.Models.heritage.User;
 import com.GreenThumb.Repositories.UserRepository; // Make sure you have a UserRepository
@@ -59,11 +60,27 @@ public class UserService {
     }
 
     // Method to retrieve Users by Role
-    public List<User> getByRole(String role) {
+    public List<User> getByRole(Role role) {
         List<User> usersByRole = userRepository.findByRole(role); // This method should be defined in UserRepository
         if (usersByRole.isEmpty()) {
             throw new ResourceNotFoundException();
         }
         return usersByRole;
+    }
+
+    public List<User> getAllJardiniers() {
+        List<User> jardiniers = userRepository.findByRole(Role.Jardinier); // Convertir en String
+        if (jardiniers.isEmpty()) {
+            throw new ResourceNotFoundException();
+        }
+        return jardiniers;
+    }
+
+    public List<User> getAllClients() {
+        List<User> clients = userRepository.findByRole(Role.Client); // Convertir en String
+        if (clients.isEmpty()) {
+            throw new ResourceNotFoundException();
+        }
+        return clients;
     }
 }
