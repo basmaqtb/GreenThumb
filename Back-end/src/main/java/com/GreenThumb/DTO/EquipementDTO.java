@@ -16,4 +16,6 @@ public class EquipementDTO {
     private String marque;
     private String model;
     private EtatEquipement etat;
+    private Long idtache;
+
 }

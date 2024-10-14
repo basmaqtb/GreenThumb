@@ -28,11 +28,8 @@ public class TacheService {
 
 
     public TacheDTO createTache(TacheDTO tacheDTO) {
-        Equipement equipement = equipementRepository.findById(tacheDTO.getIdequipement())
-                .orElseThrow(() -> new RuntimeException("Equipement not found with id: " + tacheDTO.getIdequipement()));
 
         Tache tache = tacheMapper.toEntity(tacheDTO);
-        tache.setEquipement(equipement);
         tache.setStatutTache(StatutTache.EnCours);
 
         Tache savedTache = tacheRepository.save(tache);
@@ -61,15 +58,11 @@ public class TacheService {
         Tache existingTache = tacheRepository.findById(idtache)
                 .orElseThrow(TacheNotFoundException::new);
 
-        // Fetch the Equipement based on the idequipement
-        Equipement equipement = equipementRepository.findById(tacheDTO.getIdequipement())
-                .orElseThrow(ResourceNotFoundException::new);
-
         // Set the fields from the TacheDTO to the existing Tache
+        existingTache.setNom(tacheDTO.getNom());
         existingTache.setDescription(tacheDTO.getDescription());
         existingTache.setDate(tacheDTO.getDate());
         existingTache.setStatutTache(tacheDTO.getStatutTache());
-        existingTache.setEquipement(equipement);  // Set the fetched Equipement entity
 
         // Save the updated Tache entity
         return tacheRepository.save(existingTache);

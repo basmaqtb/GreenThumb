@@ -2,7 +2,6 @@ package com.GreenThumb.Service;
 
 import com.GreenThumb.DTO.EquipementDTO;
 import com.GreenThumb.Exceptions.EquipmentNotFoundException;
-import com.GreenThumb.Mappers.EquipementMapper;
 import com.GreenThumb.Models.Enums.EtatEquipement;
 import com.GreenThumb.Models.Equipement;
 import com.GreenThumb.Repositories.EquipementRepository;

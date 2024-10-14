@@ -25,23 +25,24 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            <th scope="col">Nom</th>
                             <th scope="col">Description</th>
                             <th scope="col">Date</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Equipment ID</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let tache of filteredTaches">
+                            <td data-label="nom">{{ tache.nom }}</td>
                             <td data-label="Description">{{ tache.description }}</td>
                             <td data-label="Date">{{ tache.date | date:'shortDate' }}</td>
                             <td data-label="Status">{{ tache.statutTache }}</td>
-                            <td data-label="Equipment ID">{{ tache.idequipement }}</td>
                             <td data-label="Actions">
                                 <button class="btn btn-danger" (click)="deleteTache(tache.idtache)">Delete</button>
                                 <button class="btn btn-warning" (click)="editTache(tache.idtache)">Edit</button>
                                 <button class="btn btn-warning" (click)="details(tache.idtache)">Details</button>
+                                <a [routerLink]="['/equipements', { idtache: tache.idtache}]">Voir Equipements</a>
                             </td>
                         </tr>
                     </tbody>

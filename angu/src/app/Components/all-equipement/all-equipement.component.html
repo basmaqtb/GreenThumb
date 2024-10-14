@@ -29,6 +29,7 @@
             <th scope="col">Marque</th>
             <th scope="col">Model</th>
             <th scope="col">Etat</th>
+            <th scope="col">tache Id</th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -38,9 +39,11 @@
             <td data-label="Marque">{{ equipement.marque }}</td>
             <td data-label="modele">{{ equipement.model }}</td>
             <td data-label="Etat">{{ equipement.etat }}</td>
+            <td data-label="idtache">{{ equipement.idtache }}</td>
             <td data-label="Actions">
               <button class="btn btn-danger" (click)="deleteEquipement(equipement.idequipement)">Delete</button>
               <button class="btn btn-warning" (click)="editEquipement(equipement.idequipement)">Edit</button>
+              
             </td>
           </tr>
         </tbody>

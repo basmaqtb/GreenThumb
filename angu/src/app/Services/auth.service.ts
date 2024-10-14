@@ -11,15 +11,7 @@ export class AuthenticationService {
   constructor(private http: HttpClient) {}
 
   register(user: any): Observable<any> {
-    return this.http.post(`${this.authUrl}/register`, user).pipe(
-      tap(response => {
-        console.log('Registration response:', response); // Log response for debugging
-      }),
-      catchError(error => {
-        console.error('Registration error:', error);
-        return throwError(error); // Pass the error along
-      })
-    );
+    return this.http.post(`${this.authUrl}/register`, user);
   }
 
   login(credentials: any): Observable<any> {

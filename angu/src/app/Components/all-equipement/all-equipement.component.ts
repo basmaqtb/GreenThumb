@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router'; // Import ActivatedRoute
 import { EquipementService } from '../../Services/equipement.service';
 import { Equipement } from '../../Modules/Equipement';
 
@@ -12,23 +12,47 @@ export class AllEquipementComponent implements OnInit {
   equipements: Equipement[] = [];
   filteredEquipements: Equipement[] = [];
   searchTerm: string = '';
+  idTache: number | null = null; // Store the task ID
 
-  constructor(private equipementService: EquipementService, private router: Router) {}
+  constructor(
+    private equipementService: EquipementService, 
+    private router: Router,
+    private route: ActivatedRoute // Inject ActivatedRoute to access route parameters
+  ) {}
 
   ngOnInit(): void {
-    this.loadEquipements();
+    // Get the ID of the task from the route parameters
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('idtache'); // Assuming the parameter is named 'idtache'
+      this.idTache = id ? +id : null; // Convert to number or null if not present
+      this.loadEquipements();
+    });
   }
 
   loadEquipements(): void {
-    this.equipementService.getAllEquipements().subscribe(
-      (data) => {
-        this.equipements = data;
-        this.filteredEquipements = data; // Initialize filteredEquipements with the complete list
-      },
-      (error) => {
-        console.error('Error fetching equipements', error);
-      }
-    );
+    if (this.idTache) {
+      // Load equipements based on the task ID if present
+      this.equipementService.getEquipementsByTacheId(this.idTache).subscribe(
+        (data) => {
+          this.equipements = data;
+          this.filteredEquipements = data; // Initialize filteredEquipements with the filtered list
+        },
+        (error) => {
+          console.error('Error fetching equipements for task', error);
+        }
+      );
+    } else {
+      // Load all equipements if no task ID is provided
+      this.equipementService.getAllEquipements().subscribe(
+        (data) => {
+          this.equipements = data;
+          this.filteredEquipements = data; // Initialize filteredEquipements with the complete list
+        },
+        (error) => {
+          console.error('Error fetching equipements', error);
+        }
+      );
+    }
   }
 
   deleteEquipement(id: number): void {

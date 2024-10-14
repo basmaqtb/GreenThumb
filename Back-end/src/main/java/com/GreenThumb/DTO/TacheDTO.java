@@ -23,11 +23,10 @@ public class TacheDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idtache;
+    private String nom;
     private String description;
     private Date date;
     private StatutTache statutTache;
-    private Long idequipement;
-
 
 
 }

@@ -23,6 +23,12 @@ export class EquipementService {
     return this.http.get<Equipement>(`${this.apiUrl}/${id}`, { headers });
   }
 
+  // Get equipements by Tache ID with JWT
+  getEquipementsByTacheId(tacheId: number): Observable<Equipement[]> {
+    const headers = this.createAuthorizationHeader();
+    return this.http.get<Equipement[]>(`${this.apiUrl}/tache/${tacheId}`, { headers });
+  }
+
   // Create a new equipement with JWT
   createEquipement(equipement: Equipement): Observable<Equipement> {
     const headers = this.createAuthorizationHeader();

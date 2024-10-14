@@ -4,4 +4,6 @@ export interface Equipement{
     marque: string;
     model: string;
     etat: string
+    idtache: number
+
 }
