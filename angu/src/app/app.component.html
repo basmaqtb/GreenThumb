@@ -1,7 +1,21 @@
 <nav class="navbar navbar-expand navbar-dark bg-dark">
   <div class="container">
-    <a class="navbar-brand" href="#">GreenThumb</a>
-  <ul>
+    <header class="header">
+      <a href="/dashboard">
+        <img loading="lazy" 
+             src="https://cdn.builder.io/api/v1/image/assets/TEMP/d43b27d0f0decacfb255ea601772545cf12a88ee03a9099df62d61bf8f969a1e?placeholderIfAbsent=true&apiKey=750e5d54decc4d3fb4e8170ee0088318" 
+             alt="Company logo" 
+             class="logo" />
+      </a>      <nav class="navigation">
+        <a href="/dashboard" class="nav-link">Acceuil</a>
+        <a href="/taches" class="nav-link">Sérvices</a>
+        <a href="/rendezvous" class="nav-link">Réserver</a>
+        <a href="/equipements" class="nav-link">Nos Equipements</a>
+        <a href="/users" class="nav-link">Users</a>
+
+    </nav>
+    </header>
+    <!-- </header>  <ul>
       <li class="nav-item">
         <a class="nav-link" routerLink="/register">Register</a>
       </li>
@@ -9,9 +23,8 @@
       <li class="nav-item">  
         <a class="nav-link" href="/login">Login</a>
             </li>            
-    </ul>
-  </div>
+    </ul> -->
+ 
   
-</nav>
-
+  
 <router-outlet></router-outlet>

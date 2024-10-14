@@ -46,6 +46,9 @@ class RendezVousServiceTest {
     private JardinierRepository jardinierRepository;
 
     @Mock
+    private ClientRepository clientRepository;
+
+    @Mock
     private RendezVousMapper rendezVousMapper;
 
     @BeforeEach
@@ -53,24 +56,24 @@ class RendezVousServiceTest {
         MockitoAnnotations.openMocks(this);
     }
 
-//    @Test
-//    void testCreateRendezVous() {
-//        RendezVousDTO rendezVousDTO = new RendezVousDTO();
-//        Tache tache = new Tache();
-//        User client = new User();
-//        RendezVous rendezVous = new RendezVous();
-//
-//        when(tacheRepository.findById(anyLong())).thenReturn(Optional.of(tache));
-//        when(userRepository.findByRoleAndId(eq(Role.Client), anyLong())).thenReturn(Optional.of(client));
-//        when(rendezVousMapper.toEntity(rendezVousDTO)).thenReturn(rendezVous);
-//        when(rendezVousRepository.save(any(RendezVous.class))).thenReturn(rendezVous);
-//        when(rendezVousMapper.toDto(any(RendezVous.class))).thenReturn(rendezVousDTO);
-//
-//        RendezVousDTO result = rendezVousService.createRendezVous(rendezVousDTO, 1L);
-//
-//        assertNotNull(result);
-//        verify(rendezVousRepository, times(1)).save(rendezVous);
-//    }
+    @Test
+    void testCreateRendezVous() {
+        RendezVousDTO rendezVousDTO = new RendezVousDTO();
+        Tache tache = new Tache();
+        User client = new User();
+        RendezVous rendezVous = new RendezVous();
+
+        when(tacheRepository.findById(anyLong())).thenReturn(Optional.of(tache));
+        when(userRepository.findByRoleAndId(eq(Role.Client), anyLong())).thenReturn(Optional.of(client));
+        when(rendezVousMapper.toEntity(rendezVousDTO)).thenReturn(rendezVous);
+        when(rendezVousRepository.save(any(RendezVous.class))).thenReturn(rendezVous);
+        when(rendezVousMapper.toDto(any(RendezVous.class))).thenReturn(rendezVousDTO);
+
+        RendezVousDTO result = rendezVousService.createRendezVous(rendezVousDTO, 1L);
+
+        assertNotNull(result);
+        verify(rendezVousRepository, times(1)).save(rendezVous);
+    }
 
     @Test
     void testAttribuerRendezVous() {
@@ -89,21 +92,6 @@ class RendezVousServiceTest {
         assertEquals(StatutRendezVous.EnCours, rendezVous.getStatutRendezVous());
         verify(rendezVousRepository, times(1)).save(rendezVous);
     }
-
-//    @Test
-//    void testGetRendezVousByJardinier() {
-//        User jardinier = new User();
-//        List<RendezVous> rendezVousList = List.of(new RendezVous(), new RendezVous());
-//
-//        when(userRepository.findById(anyLong())).thenReturn(Optional.of(jardinier));
-//        when(rendezVousRepository.findByJardinier(jardinier)).thenReturn(rendezVousList);
-//        when(rendezVousMapper.toDto(any(RendezVous.class))).thenReturn(new RendezVousDTO());
-//
-//        List<RendezVousDTO> result = rendezVousService.getRendezVousByJardinier(1L);
-//
-//        assertNotNull(result);
-//        assertEquals(2, result.size());
-//    }
 
     @Test
     void testGetAllRendezVous() {
@@ -151,5 +139,35 @@ class RendezVousServiceTest {
         rendezVousService.deleteRendezVous(1L);
 
         verify(rendezVousRepository, times(1)).delete(rendezVous);
+    }
+
+    @Test
+    void testGetAllRendezVousByClient() {
+        User client = new User();
+        List<RendezVous> rendezVousList = List.of(new RendezVous(), new RendezVous());
+
+        when(userRepository.findByRoleAndId(eq(Role.Client), anyLong())).thenReturn(Optional.of(client));
+        when(rendezVousRepository.findByClient(client)).thenReturn(rendezVousList);
+        when(rendezVousMapper.toDto(any(RendezVous.class))).thenReturn(new RendezVousDTO());
+
+        List<RendezVousDTO> result = rendezVousService.getAllRendezVousByClient(1L);
+
+        assertNotNull(result);
+        assertEquals(2, result.size());
+    }
+
+    @Test
+    void testGetRendezVousByJardinier() {
+        User jardinier = new User();
+        List<RendezVous> rendezVousList = List.of(new RendezVous(), new RendezVous());
+
+        when(userRepository.findByRoleAndId(eq(Role.Jardinier), anyLong())).thenReturn(Optional.of(jardinier));
+        when(rendezVousRepository.findByJardinier(jardinier)).thenReturn(rendezVousList);
+        when(rendezVousMapper.toDto(any(RendezVous.class))).thenReturn(new RendezVousDTO());
+
+        List<RendezVousDTO> result = rendezVousService.getRendezVousByJardinier(1L);
+
+        assertNotNull(result);
+        assertEquals(2, result.size());
     }
 }

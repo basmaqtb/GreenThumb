@@ -26,19 +26,13 @@ public class TacheService {
     @Autowired
     private EquipementRepository equipementRepository;
 
-
     public TacheDTO createTache(TacheDTO tacheDTO) {
-
         Tache tache = tacheMapper.toEntity(tacheDTO);
-        tache.setStatutTache(StatutTache.EnCours);
+        tache.setStatutTache(StatutTache.EnCours);  // Par défaut, le statut est "EnCours"
 
         Tache savedTache = tacheRepository.save(tache);
-
         return tacheMapper.toDto(savedTache);
     }
-
-
-
 
     public List<Tache> getAllTaches() {
         List<Tache> taches = tacheRepository.findAll();
@@ -48,31 +42,25 @@ public class TacheService {
         return taches;
     }
 
-    public Tache getTacheById(Long idtache) {
-        return tacheRepository.findById(idtache)
-                .orElseThrow(TacheNotFoundException::new);
+    public Tache getTacheById(Long idTache) {
+        return tacheRepository.findById(idTache)
+                .orElseThrow(() -> new TacheNotFoundException());
     }
 
-    public Tache updateTache(Long idtache, TacheDTO tacheDTO) {
-        // Fetch the existing Tache from the repository
-        Tache existingTache = tacheRepository.findById(idtache)
-                .orElseThrow(TacheNotFoundException::new);
+    public Tache updateTache(Long idTache, TacheDTO tacheDTO) {
+        Tache existingTache = getTacheById(idTache);
 
-        // Set the fields from the TacheDTO to the existing Tache
+        // Mise à jour des champs
         existingTache.setNom(tacheDTO.getNom());
         existingTache.setDescription(tacheDTO.getDescription());
         existingTache.setDate(tacheDTO.getDate());
         existingTache.setStatutTache(tacheDTO.getStatutTache());
 
-        // Save the updated Tache entity
         return tacheRepository.save(existingTache);
     }
 
-
-
-    public void deleteTache(Long idtache) {
-        Tache tache = tacheRepository.findById(idtache)
-                .orElseThrow(TacheNotFoundException::new);
+    public void deleteTache(Long idTache) {
+        Tache tache = getTacheById(idTache);
         tacheRepository.delete(tache);
     }
 }
