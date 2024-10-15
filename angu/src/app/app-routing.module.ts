@@ -36,12 +36,6 @@ const routes: Routes = [
   { path: 'users/update/:id', component: AddUserComponent },
 
 
-
-  
-
-  
-
-
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 
