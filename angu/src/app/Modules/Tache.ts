@@ -4,4 +4,6 @@ export interface Tache{
     description: string;
     date: Date;
     statutTache: string;
+    imageUrl?: string; // Add this line
+
 }

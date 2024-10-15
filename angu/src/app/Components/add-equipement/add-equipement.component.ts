@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EquipementService } from '../../Services/equipement.service'; // Adjust path if necessary
 import { Equipement } from '../../Modules/Equipement'; // Adjust path if necessary
+import { TacheService } from '../../Services/tache.service'; // Import TacheService
+import { Tache } from '../../Modules/Tache'; // Import Tache
 
 @Component({
   selector: 'app-add-equipement',
@@ -14,10 +16,12 @@ export class AddEquipementComponent implements OnInit {
   equipementForm: FormGroup;
   isEditMode: boolean = false;
   equipementId: number | null = null;
+  taches: Tache[] = []; // To hold the list of taches
 
   constructor(
     private fb: FormBuilder,
     private equipementService: EquipementService,
+    private tacheService: TacheService, // Inject TacheService
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -26,12 +30,16 @@ export class AddEquipementComponent implements OnInit {
       etat: ['', Validators.required],
       marque: ['', Validators.required],
       model: ['', Validators.required],
-      type: ['', Validators.required]
+      type: ['', Validators.required],
+      idtache: ['', Validators.required] // Add idtache to the form
     });
   }
 
   ngOnInit(): void {
-    // Check if the URL has an 'id' parameter to determine if we're editing or creating
+    // Load existing taches when the component initializes
+    this.loadTaches();
+
+    // Check if we're in edit mode
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
       if (id) {
@@ -42,6 +50,18 @@ export class AddEquipementComponent implements OnInit {
           // Populate the form with the existing equipement data
           this.equipementForm.patchValue(equipement);
         });
+      }
+    });
+  }
+
+  // Load taches from the backend
+  loadTaches(): void {
+    this.tacheService.getAllTaches().subscribe({
+      next: (data) => {
+        this.taches = data;
+      },
+      error: (err) => {
+        console.error('Error loading taches:', err);
       }
     });
   }

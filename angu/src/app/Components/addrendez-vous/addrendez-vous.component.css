@@ -1,83 +1,68 @@
-.add-rendezvous-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
+.add-tache-container {
+  max-width: 600px; /* Set the maximum width of the form */
+  margin: 0 auto;   /* Center the form horizontally */
+  padding: 20px;    /* Add padding around the form */
+  border: 1px solid #ccc; /* Optional: Add a border around the form */
+  border-radius: 5px; /* Optional: Add rounded corners */
+  background-color: #f9f9f9; /* Optional: Light background color */
 }
-
-.add-rendezvous-container h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 24px;
-  color: #333;
-}
-
-.add-rendezvous-container form {
-  display: flex;
-  flex-direction: column;
-}
-
-.add-rendezvous-container form div {
-  margin-bottom: 15px;
-}
-
-.add-rendezvous-container label {
+.main-content{
   display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-  color: #333;
+
 }
 
-.add-rendezvous-container input, .add-rendezvous-container select {
-  width: 100%;
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+.inline-section {
+  display: flex; /* Use flexbox to align items inline */
+  align-items: flex-start; /* Align items to the start */
 }
 
-.add-rendezvous-container input[type="time"], 
-.add-rendezvous-container input[type="date"] {
-  max-width: 200px;
+.image-section {
+  flex: 1; /* Allow image section to take available space */
+  margin-right: 20px; /* Space between image and form */
+  width: 100px;
 }
 
-.add-rendezvous-container input:focus, .add-rendezvous-container select:focus {
-  border-color: #66afe9;
-  outline: none;
+.form-section {
+  flex: 2; /* Allow form section to take more space */
 }
 
-.add-rendezvous-container button {
-  padding: 10px;
-  font-size: 18px;
-  color: white;
-  background-color: #28a745;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  text-align: center;
+.add-tache-container h2 {
+  text-align: center; /* Center the heading */
+  margin-bottom: 20px; /* Add margin below the heading */
 }
 
-.add-rendezvous-container button[disabled] {
-  background-color: #ccc;
-  cursor: not-allowed;
+.add-tache-container .form-group {
+  margin-bottom: 15px; /* Add space between form groups */
 }
 
-.add-rendezvous-container button:hover:not([disabled]) {
-  background-color: #218838;
+.add-tache-container .form-input {
+  width: 100%; /* Full width of the input/select elements */
+  padding: 10px; /* Padding inside the input/select elements */
+  border-radius: 4px; /* Rounded corners for input/select */
+  border: 1px solid #ccc; /* Border color for input/select */
 }
 
-.add-rendezvous-container div.ng-invalid.ng-touched {
-  border-color: red;
+.add-tache-container .submit-button {
+  margin-top: 10px; /* Space above the button */
+  padding: 10px 15px; /* Padding for the button */
+  background-color: #007bff; /* Button background color */
+  color: #fff; /* Button text color */
+  border: none; /* No border for the button */
+  border-radius: 4px; /* Rounded corners for the button */
+  cursor: pointer; /* Pointer cursor on hover */
 }
 
-.add-rendezvous-container .ng-invalid.ng-touched {
-  border: 1px solid red;
+.add-tache-container .submit-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
 }
 
-.add-rendezvous-container .error-message {
-  color: red;
-  font-size: 14px;
+.add-tache-container .form-input:focus {
+  border-color: #007bff; /* Border color on focus */
+  outline: none; /* Remove outline on focus */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Shadow effect on focus */
+}
+
+.add-tache-container .form-group div {
+  color: red; /* Error message color */
+  font-size: 12px; /* Font size for error messages */
 }

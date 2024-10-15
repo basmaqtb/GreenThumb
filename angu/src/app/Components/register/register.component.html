@@ -1,74 +1,85 @@
 <div class="container">
-    <h2 class="text-center">Register</h2>
-    <form [formGroup]="registerForm" (ngSubmit)="register()">
-        <div class="form-group">
-            <label for="fullName">Full Name</label>
+    <main class="main-content">
+      <section class="image-section">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/730f4355e66d72d313067fa2e510380f3f6734df00573908b1fa90da09c6a802?placeholderIfAbsent=true&apiKey=750e5d54decc4d3fb4e8170ee0088318" alt="Registration Illustration" class="registration-image" />
+      </section>
+  
+      <section class="form-section">
+        <h1 class="text-center">Register</h1>
+        <form class="registration-form" [formGroup]="registerForm" (ngSubmit)="register()">
+          <div class="form-group">
+            <label for="fullName" class="form-label"></label>
             <input 
-                type="text" 
-                class="form-control" 
-                id="fullName" 
-                formControlName="fullName" 
-                required 
-                placeholder="Enter your full name" 
+              type="text" 
+              class="form-control form-input" 
+              id="fullName" 
+              formControlName="fullName" 
+              required 
+              placeholder="Full Name" 
             />
-        </div>
-
-        <div class="form-group">
-            <label for="phone">Phone</label>
+          </div>
+  
+          <div class="form-group">
+            <label for="email" class="form-label"></label>
             <input 
-                type="tel" 
-                class="form-control" 
-                id="phone" 
-                formControlName="phone" 
-                required 
-                placeholder="Enter your phone number" 
+              type="email" 
+              class="form-control form-input" 
+              id="email" 
+              formControlName="email" 
+              required 
+              placeholder="Email" 
             />
-        </div>
-
-        <div class="form-group">
-            <label for="email">Email</label>
+          </div>
+  
+          <div class="form-group">
+            <label for="phone" class="form-label"></label>
             <input 
-                type="email" 
-                class="form-control" 
-                id="email" 
-                formControlName="email" 
-                required 
-                placeholder="Enter your email" 
+              type="tel" 
+              class="form-control form-input" 
+              id="phone" 
+              formControlName="phone" 
+              required 
+              placeholder="Phone" 
             />
-        </div>
-
-        <div class="form-group">
-            <label for="password">Password</label>
+          </div>
+  
+          <div class="form-group">
+            <label for="password" class="form-label"></label>
             <input 
-                type="password" 
-                class="form-control" 
-                id="password" 
-                formControlName="password" 
-                required 
-                placeholder="Enter your password" 
+              type="password" 
+              class="form-control form-input" 
+              id="password" 
+              formControlName="password" 
+              required 
+              placeholder="Password" 
             />
-        </div>
-
-        <div class="form-group">
+          </div>
+  
+          <div class="form-label">
             <label for="role">Role</label>
             <select 
-                class="form-control" 
-                id="role" 
-                formControlName="role" 
-                required 
+              class="form-control form-input" 
+              id="role" 
+              formControlName="role"
+              required 
+              placeholder="Enter Role"  
+
             >
-                <option value="" disabled>Select your role</option>
-                <option value="ADMIN">Admin</option>
-                <option value="Client">Client</option>
-                <option value="Jardinier">Jardinier</option>
-                <option value="CLIENT" selected>Client</option> <!-- Default selected role -->
+              <option value="" disabled>Select your role</option>
+              <option value="ADMIN">Admin</option>
+              <option value="Client">Client</option>
+              <option value="Jardinier">Jardinier</option>
+              <option value="CLIENT" selected>Client</option> <!-- Default selected role -->
             </select>
+          </div>
+  
+          <button type="submit" class="submit-button" [disabled]="registerForm.invalid">Register</button>
+        </form>
+  
+        <div class="mt-3">
+          <a routerLink="/login">Already have an account? Login here</a>
         </div>
-
-        <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Register</button>
-    </form>
-
-    <div class="mt-3 text-center">
-        <a routerLink="/login">Already have an account? Login here</a>
-    </div>
-</div>
+      </section>
+    </main>
+  </div>
+  

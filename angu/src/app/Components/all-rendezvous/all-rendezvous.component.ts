@@ -108,16 +108,6 @@ assignJardinier(rendezVousId: number): void {
   }
 }
 
-// promptForJardinierId(rendezVousId: number): void {
-//   const jardinierId = prompt("Entrez l'ID du Jardinier pour l'assigner à ce rendez-vous :");
-
-//   if (jardinierId) {
-//       // Convert the jardinierId to a number
-//       this.assignJardinier(rendezVousId);
-//   } else {
-//       alert('Aucun ID de Jardinier fourni.');
-//   }
-// }
 
   deleteRendezVous(id: number): void {
     if (confirm('Are you sure you want to delete this rendezvous?')) {

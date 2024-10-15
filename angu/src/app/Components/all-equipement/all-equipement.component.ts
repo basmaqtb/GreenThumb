@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router'; // Import ActivatedRoute
+import { Router, ActivatedRoute } from '@angular/router';
 import { EquipementService } from '../../Services/equipement.service';
 import { Equipement } from '../../Modules/Equipement';
+import { AuthenticationService } from '../../Services/auth.service'; // Import AuthenticationService
 
 @Component({
   selector: 'app-all-equipement',
@@ -12,41 +13,46 @@ export class AllEquipementComponent implements OnInit {
   equipements: Equipement[] = [];
   filteredEquipements: Equipement[] = [];
   searchTerm: string = '';
-  idTache: number | null = null; // Store the task ID
+  idTache: number | null = null;
+  userRole: string | null = null; // Variable to hold user role
 
   constructor(
     private equipementService: EquipementService, 
     private router: Router,
-    private route: ActivatedRoute // Inject ActivatedRoute to access route parameters
+    private route: ActivatedRoute,
+    private authService: AuthenticationService // Inject AuthenticationService
   ) {}
 
   ngOnInit(): void {
-    // Get the ID of the task from the route parameters
+    this.loadUserInfo(); // Load user information
     this.route.paramMap.subscribe(params => {
-      const id = params.get('idtache'); // Assuming the parameter is named 'idtache'
-      this.idTache = id ? +id : null; // Convert to number or null if not present
+      const id = params.get('idtache');
+      this.idTache = id ? +id : null;
       this.loadEquipements();
     });
   }
 
+  loadUserInfo(): void {
+    const role = localStorage.getItem('role'); // Get user role from localStorage
+    this.userRole = role; // Store user role
+  }
+
   loadEquipements(): void {
     if (this.idTache) {
-      // Load equipements based on the task ID if present
       this.equipementService.getEquipementsByTacheId(this.idTache).subscribe(
         (data) => {
           this.equipements = data;
-          this.filteredEquipements = data; // Initialize filteredEquipements with the filtered list
+          this.filteredEquipements = data;
         },
         (error) => {
           console.error('Error fetching equipements for task', error);
         }
       );
     } else {
-      // Load all equipements if no task ID is provided
       this.equipementService.getAllEquipements().subscribe(
         (data) => {
           this.equipements = data;
-          this.filteredEquipements = data; // Initialize filteredEquipements with the complete list
+          this.filteredEquipements = data;
         },
         (error) => {
           console.error('Error fetching equipements', error);
@@ -60,7 +66,7 @@ export class AllEquipementComponent implements OnInit {
       this.equipementService.deleteEquipement(id).subscribe(
         () => {
           this.equipements = this.equipements.filter(equipement => equipement.idequipement !== id);
-          this.searchEquipements(); // Reapply filter after deletion
+          this.searchEquipements();
         },
         (error) => {
           console.error('Error deleting equipement', error);

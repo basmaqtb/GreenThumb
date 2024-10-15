@@ -1,64 +1,102 @@
-/* Container styling */
-.container {
-    max-width: 500px; /* Limit the width of the form */
-    margin: 50px auto; /* Center the form vertically and horizontally */
-    padding: 20px; /* Add some padding */
-    border-radius: 8px; /* Round the corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-    background-color: #f8f9fa; /* Light background color */
+
+
+
+.main-content {
+  display: flex;
+  gap: 20px;
+  margin: 2px auto 0;
+  max-width: 1768px;
+  width: 90%;
+  height: 80%;
 }
 
-/* Header styling */
-h2 {
-    margin-bottom: 20px; /* Add space below the header */
-    color: #343a40; /* Dark color for the text */
+.image-section {
+  overflow: hidden;
 }
 
-/* Form group styling */
+.registration-image {
+  aspect-ratio: 0.9;
+  object-fit: contain;
+  width: 100%;
+}
+.text-center{
+    font: 100 40px/1 'Roboto Condensed', sans-serif;
+    letter-spacing: 6px;
+}
+
+.form-section {
+  flex: 0 0 45%;
+}
+
+.form-title {
+  font: 400 200px/1 'Roboto Condensed', sans-serif;
+  letter-spacing: 6px;
+}
+
+.registration-form {
+  margin-top: 20px;
+}
+
 .form-group {
-    margin-bottom: 15px; /* Space between form groups */
+  margin-bottom: 50px;
 }
 
-/* Input styling */
-input.form-control,
-select.form-control {
-    height: 45px; /* Increase height for better usability */
-    border: 1px solid #ced4da; /* Light border color */
-    border-radius: 5px; /* Slightly round the input corners */
-    padding: 0 10px; /* Add some padding inside the input */
-    transition: border-color 0.3s; /* Smooth transition for focus state */
+
+.form-input {
+  border: none;
+  border-bottom: 2px solid #000;
+  font: 200 17px/2 'Roboto Condensed', sans-serif;
+  letter-spacing: 1.92px;
+  width: 90%;
 }
 
-/* Input focus styling */
-input.form-control:focus,
-select.form-control:focus {
-    border-color: #007bff; /* Change border color on focus */
-    outline: none; /* Remove default outline */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add glow effect */
+.submit-button {
+  background-color: #000;
+  border: none;
+  border-radius: 9px;
+  box-shadow: 0 2px 4px 3px rgba(0, 0, 0, 0.25);
+  color: #fff;
+  cursor: pointer;
+  font: 400 20px/1 Alata, sans-serif;
+  letter-spacing: 1.86px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  padding: 15px 70px;
+  width:500px;
 }
 
-/* Button styling */
-.btn-primary {
-    width: 100%; /* Make the button full width */
-    height: 45px; /* Set a uniform height */
-    font-size: 16px; /* Increase font size */
-    border-radius: 5px; /* Round the button corners */
-    transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
-}
+@media (max-width: 991px) {
+  .header {
+    padding-right: 20px;
+  }
 
-/* Button hover effect */
-.btn-primary:hover {
-    background-color: #0056b3; /* Darken button color on hover */
-    transform: translateY(-2px); /* Slightly raise the button */
-}
+  .main-content {
+    flex-direction: column;
+    margin-top: 40px;
+  }
 
-/* Link styling */
-a {
-    color: #007bff; /* Link color */
-    text-decoration: none; /* Remove underline */
-}
+  .image-section, .form-section {
+    flex-basis: 100%;
+  }
 
-/* Link hover effect */
-a:hover {
-    text-decoration: underline; /* Underline on hover */
+  .form-section {
+    padding-top: 40px;
+  }
+
+  .form-title {
+    font-size: 40px;
+  }
+
+  .registration-form {
+    margin-top: 40px;
+  }
+
+  .form-group {
+    margin-bottom: 40px;
+  }
+
+  .submit-button {
+    margin-top: 40px;
+    padding: 20px 40px;
+  }
 }

@@ -1,6 +1,11 @@
-/* equipement-list.component.css */
-.logo{
-  font-size: 1.5em;
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* Logo */
+.logo {
+  font-size: 1.8em;
   font-weight: lighter;
   color: #2c8f2b;
   text-decoration: none;
@@ -8,89 +13,118 @@
   margin-bottom: 20px;
 }
 
+/* Container for Equipment List */
 .equipement-list-container {
-    padding: 20px;
-  }
-  
-  .equipement-list-container h2 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
-  }
-  
-  .search-container {
-    margin-bottom: 20px;
-  }
-  
-  .search-container input {
-    width: 100%;
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-  }
-  
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto; /* Center the container */
+}
+
+/* Header */
+.equipement-list-container h2 {
+  margin-bottom: 20px;
+  font-size: 28px; /* Increased font size for better visibility */
+  color: #333;
+}
+
+/* Search Container */
+.search-container {
+  margin-bottom: 20px;
+}
+
+/* Search Input */
+.search-container input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* Table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Table Header */
+.table thead {
+  background-color: #f8f9fa;
+}
+
+.table th {
+  padding: 12px; /* Increased padding for better touch targets */
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+  font-weight: bold;
+}
+
+/* Table Body */
+.table td {
+  padding: 12px; /* Increased padding for better touch targets */
+  border-bottom: 1px solid #ddd;
+}
+
+/* Row Hover Effect */
+.table tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Button Styles */
+.table .btn {
+  margin-right: 5px;
+}
+
+.btn-danger, .btn-warning {
+  border: none;
+  padding: 8px 12px; /* Increased padding */
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  color: black;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+}
+
+/* No Equipements Message */
+.no-equipement-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.no-equipement-container p {
+  font-size: 20px; /* Increased font size for better visibility */
+  color: #777;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .table {
-    width: 100%;
-    border-collapse: collapse;
+    font-size: 14px; /* Adjust font size for smaller screens */
   }
-  
-  .table thead {
-    background-color: #f8f9fa;
+
+  .table th, .table td {
+    padding: 8px; /* Adjust padding for smaller screens */
   }
-  
-  .table th {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 2px solid #ddd;
-    font-weight: bold;
+
+  .logo {
+    font-size: 1.5em; /* Adjust logo size for smaller screens */
   }
-  
-  .table td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+
+  .equipement-list-container h2 {
+    font-size: 24px; /* Adjust header size for smaller screens */
   }
-  
-  .table tr:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .table .btn {
-    margin-right: 5px;
-  }
-  
-  .btn-danger {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .btn-danger:hover {
-    background-color: #c82333;
-  }
-  
-  .btn-warning {
-    background-color: #ffc107;
-    color: black;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .btn-warning:hover {
-    background-color: #e0a800;
-  }
-  
-  .no-equipement-container {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .no-equipement-container p {
-    font-size: 18px;
-    color: #777;
-  }
-  
+}

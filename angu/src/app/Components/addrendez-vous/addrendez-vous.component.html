@@ -1,64 +1,79 @@
-<div class="add-rendezvous-container">
-  <h2>{{ isEditMode ? 'Edit RendezVous' : 'Add RendezVous' }}</h2>
-  <form [formGroup]="rendezVousForm" (ngSubmit)="onSubmit()">
+<div class="container">
+  <main class="main-content">
+    <section class="image-section">
+      <img
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/a1812c05ca611720726362b4fa3953f4d05c11cca5fa07ebf782a0cc9136e282?placeholderIfAbsent=true&apiKey=750e5d54decc4d3fb4e8170ee0088318"
+        alt="Hydroponic Method Illustration"
+        class="registration-image" />
+    </section>
+
+    <section class="form-section">
+      <h2 class="text-center">{{ isEditMode ? 'Edit RendezVous' : 'Reserver' }}</h2>
+      <form class="registration-form" [formGroup]="rendezVousForm" (ngSubmit)="onSubmit()">
+        
+        <div class="form-group">
+          <label for="heure"></label>
+          <input id="heure" formControlName="heure" type="time" class="form-input" />
+          <div *ngIf="rendezVousForm.get('heure')?.invalid && rendezVousForm.get('heure')?.touched">
+            Heure is required.
+          </div>
+        </div>
     
-    <div>
-      <label for="heure">Heure</label>
-      <input id="heure" formControlName="heure" type="time" />
-      <div *ngIf="rendezVousForm.get('heure')?.invalid && rendezVousForm.get('heure')?.touched">
-        Heure is required.
-      </div>
-    </div>
+        <div class="form-group">
+          <label for="date"></label>
+          <input type="date" id="date" formControlName="date" class="form-input" />
+          <div *ngIf="rendezVousForm.get('date')?.invalid && rendezVousForm.get('date')?.touched">
+            Date is required.
+          </div>
+        </div>
+    
+        <div class="form-group">
+          <label for="lieu"></label>
+          <input id="lieu" formControlName="lieu" class="form-input" placeholder="Enter Lieu" />
+          <div *ngIf="rendezVousForm.get('lieu')?.invalid && rendezVousForm.get('lieu')?.touched">
+            Lieu is required.
+          </div>
+        </div>
+    
+        <div class="form-group">
+          <label for="statutRendezVous">>Select the status</label>
+          <select id="statutRendezVous" formControlName="statutRendezVous" class="form-input">
+            <option value="" disabled></option>
+            <option value="fini">fini</option>
+            <option value="EnCours">EnCours</option>
+          </select>
+          <div *ngIf="rendezVousForm.get('statutRendezVous')?.invalid && rendezVousForm.get('statutRendezVous')?.touched">
+            Statut RendezVous is required.
+          </div>
+        </div>
+    
+        <div class="form-group">
+          <label for="idtache">>Select the Task</label>
+          <select id="idtache" formControlName="idtache" class="form-input">
+            <option value="" disabled>Select the Task</option>
+            <option *ngFor="let tache of taches" [value]="tache.idtache">{{ tache.nom }}</option> <!-- Assuming 'nom' is the property to display -->
+          </select>
+          <div *ngIf="rendezVousForm.get('idtache')?.invalid && rendezVousForm.get('idtache')?.touched">
+            Tache is required.
+          </div>
+        </div>
 
-    <div>
-      <label for="date">Date</label>
-      <input type="date" id="date" formControlName="date" />
-      <div *ngIf="rendezVousForm.get('date')?.invalid && rendezVousForm.get('date')?.touched">
-        Date is required.
-      </div>
-    </div>
-
-    <div>
-      <label for="lieu">Lieu</label>
-      <input id="lieu" formControlName="lieu" />
-      <div *ngIf="rendezVousForm.get('lieu')?.invalid && rendezVousForm.get('lieu')?.touched">
-        Lieu is required.
-      </div>
-    </div>
-
-    <div>
-      <label for="statutRendezVous">Statut RendezVous</label>
-      <select id="statutRendezVous" formControlName="statutRendezVous">
-        <option value="" disabled>Select the status</option>
-        <option value="fini">fini</option>
-        <option value="EnCours">EnCours</option>
-      </select>
-      <div *ngIf="rendezVousForm.get('statutRendezVous')?.invalid && rendezVousForm.get('statutRendezVous')?.touched">
-        Statut RendezVous is required.
-      </div>
-    </div>
-
-    <div>
-      <label for="idtache">Tache ID</label>
-      <select id="idtache" formControlName="idtache">
-        <option value="" disabled>Select a task</option>
-        <option *ngFor="let tache of taches" [value]="tache.idtache">{{ tache.nom }}</option> <!-- Assuming 'nom' is the property to display -->
-      </select>
-      <div *ngIf="rendezVousForm.get('idtache')?.invalid && rendezVousForm.get('idtache')?.touched">
-        Tache ID is required.
-      </div>
-    </div>
-
-    <div *ngIf="isAdmin || isJardinier"> <!-- Affiche le champ seulement si l'utilisateur est admin ou jardinier -->
-      <label for="idjardinier">Jardinier ID</label>
-      <input id="idjardinier" formControlName="idjardinier" type="number" />
-      <div *ngIf="rendezVousForm.get('idjardinier')?.invalid && rendezVousForm.get('idjardinier')?.touched">
-        Jardinier ID is required.
-      </div>
-    </div>
-
-    <button type="submit" [disabled]="rendezVousForm.invalid">
-      {{ isEditMode ? 'Update RendezVous' : 'Add RendezVous' }}
-    </button>
-  </form>
+        <div *ngIf="isAdmin || isJardinier" class="form-group"> <!-- Display this field only if the user is admin or jardinier -->
+          <label for="idjardinier">Select Jardinier</label>
+          <select id="idjardinier" formControlName="idjardinier" class="form-input">
+            <option value="" disabled>Select a Jardinier</option>
+            <option *ngFor="let jardinier of jardiniers" [value]="jardinier.id">{{ jardinier.fullName }}</option> <!-- Assuming 'username' is the property to display -->
+          </select>
+          <div *ngIf="rendezVousForm.get('idjardinier')?.invalid && rendezVousForm.get('idjardinier')?.touched">
+            Jardinier is required.
+          </div>
+        </div>
+        
+    
+        <button type="submit" class="submit-button" [disabled]="rendezVousForm.invalid">
+          {{ isEditMode ? 'Update RendezVous' : 'Reserver' }}
+        </button>
+      </form>
+    </section>
+  </main>
 </div>
