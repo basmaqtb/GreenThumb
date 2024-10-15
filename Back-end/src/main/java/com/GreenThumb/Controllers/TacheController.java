@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,24 +26,29 @@ public class TacheController {
     private TacheMapper tacheMapper;
 
     @GetMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_Jardinier') or hasRole('ROLE_Client')")
     public ResponseEntity<List<TacheDTO>> getAllTaches() {
         List<Tache> taches = tacheService.getAllTaches();
         return ResponseEntity.ok(tacheMapper.toDto(taches));
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<TacheDTO> createTache(@Valid @RequestBody TacheDTO tacheDTO) {
         TacheDTO createdTache = tacheService.createTache(tacheDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdTache);
     }
 
+
     @PutMapping("/update/{idtache}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<TacheDTO> updateTache(@PathVariable Long idtache, @Valid @RequestBody TacheDTO updatedTacheDTO) {
         Tache updatedTache = tacheService.updateTache(idtache, updatedTacheDTO);
         return ResponseEntity.ok(tacheMapper.toDto(updatedTache));
     }
 
     @GetMapping("/{idtache}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<TacheDTO> getTacheById(@PathVariable("idtache") Long idtache) {
         Tache tache = tacheService.getTacheById(idtache);
         TacheDTO tacheDTO = tacheMapper.toDto(tache);
@@ -50,6 +56,7 @@ public class TacheController {
     }
 
     @DeleteMapping("/delete/{idtache}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> deleteTache(@PathVariable Long idtache) {
         try {
             tacheService.deleteTache(idtache);

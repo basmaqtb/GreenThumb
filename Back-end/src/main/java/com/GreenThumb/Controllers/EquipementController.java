@@ -9,6 +9,7 @@ import com.GreenThumb.Services.EquipementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,12 +26,14 @@ public class EquipementController {
     private EquipementMapper equipementMapper;
 
     @GetMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_Jardinier') or hasRole('ROLE_Client')")
     public ResponseEntity<List<EquipementDTO>> getAllEquipements() {
         List<Equipement> equipements = equipementService.getAllEquipments();
         return ResponseEntity.ok(equipementMapper.toDto(equipements));
     }
 
     @PostMapping("/add/{idtache}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<EquipementDTO> createEquipement(@RequestBody EquipementDTO equipementDTO, @PathVariable("idtache") Long idtache) {
         var createdEquipement = equipementService.createEquipment(equipementDTO, idtache);
         return ResponseEntity.status(HttpStatus.CREATED).body(equipementMapper.toDto(createdEquipement));
@@ -38,6 +41,7 @@ public class EquipementController {
 
 
     @GetMapping("/{idequipement}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_Jardinier') or hasRole('ROLE_Client')")
     public ResponseEntity<EquipementDTO> getEquipementById(@PathVariable("idequipement") Long idequipement) {
         Equipement equipement = equipementService.getEquipmentById(idequipement);
         EquipementDTO equipementDTO = equipementMapper.toDto(equipement);
@@ -45,6 +49,7 @@ public class EquipementController {
     }
 
     @PutMapping("/update/{idequipement}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<EquipementDTO> updateEquipement(@PathVariable Long idequipement, @RequestBody EquipementDTO updatedEquipementDTO) {
         try {
             var updatedEquipement = equipementService.updateEquipement(idequipement, updatedEquipementDTO);
@@ -56,6 +61,7 @@ public class EquipementController {
     }
 
     @DeleteMapping("/delete/{idequipement}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> deleteEquipement(@PathVariable Long idequipement) {
         try {
             equipementService.deleteEquipment(idequipement);
@@ -66,6 +72,7 @@ public class EquipementController {
     }
 
     @GetMapping("/tache/{idtache}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_Jardinier') or hasRole('ROLE_Client')")
     public ResponseEntity<List<EquipementDTO>> getAllEquipementsByTache(@PathVariable Long idtache) {
         List<Equipement> equipments = equipementService.getAllEquipmentsByTache(idtache);
         return ResponseEntity.ok(equipementMapper.toDto(equipments)); // Assuming you have a method to convert list of Equipements to DTOs

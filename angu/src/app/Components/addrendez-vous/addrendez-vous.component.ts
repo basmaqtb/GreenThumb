@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RendezVousService } from '../../Services/rendez-vous.service'; // Adjust the path if necessary
-import { TacheService } from '../../Services/tache.service'; // Make sure this import path is correct
-import { Tache } from '../../Modules/Tache'; // Adjust the path if necessary
+import { RendezVousService } from '../../Services/rendez-vous.service';
+import { TacheService } from '../../Services/tache.service';
+import { UserService } from '../../Services/user.service'; // Import UserService
+import { Tache } from '../../Modules/Tache';
+import { Utilisateur } from '../../Modules/Utilisateur'; // Import Utilisateur
 
 @Component({
   selector: 'app-add-rendez-vous',
@@ -14,58 +16,68 @@ export class AddrendezVousComponent implements OnInit {
 
   rendezVousForm: FormGroup;
   isEditMode: boolean = false;
+  isDetailMode: boolean = false; // New variable for detail mode
   rendezVousId: number | null = null;
-  clientId: number | null = null; // Variable to hold the client ID
-  isAdmin: boolean = false; // Variable to check if user is Admin
-  isJardinier: boolean = false; // Variable to check if user is Jardinier
-  taches: Tache[] = []; // Array to hold the fetched tasks
-
+  clientId: number | null = null; 
+  isAdmin: boolean = false; 
+  isJardinier: boolean = false; 
+  taches: Tache[] = []; 
+  jardiniers: Utilisateur[] = []; // Array to hold fetched jardiniers
 
   constructor(
     private fb: FormBuilder,
     private rendezVousService: RendezVousService,
-    private tacheService: TacheService, // Ensure this line exists
+    private tacheService: TacheService,
+    private userService: UserService, // Inject UserService
     private route: ActivatedRoute,
     private router: Router
   ) {
-    // Initialize the form with validators
     this.rendezVousForm = this.fb.group({
       heure: ['', Validators.required],
       date: ['', Validators.required],
       lieu: ['', Validators.required],
       statutRendezVous: ['', Validators.required],
       idtache: [null, Validators.required],
-      idjardinier: [null] // Notez que ce champ n'est pas requis pour le client
+      idjardinier: [null] 
     });
   }
 
   ngOnInit(): void {
     this.loadClientId();
-    this.checkUserRole(); // Vérifiez le rôle de l'utilisateur
+    this.checkUserRole(); 
     this.checkEditMode();
-    this.loadTaches(); // Load tasks on component initialization
+    this.loadTaches(); 
+    this.loadJardiniers(); // Load jardiniers on component initialization
   }
 
   loadTaches(): void {
     this.tacheService.getAllTaches().subscribe((taches: Tache[]) => {
-      this.taches = taches; // Store fetched tasks in the array
+      this.taches = taches; 
     }, (error: any) => {
       console.error('Error fetching tasks:', error);
     });
   }
 
+  loadJardiniers(): void {
+    this.userService.getAllJardiniers().subscribe((jardiniers: Utilisateur[]) => {
+      this.jardiniers = jardiniers; // Store fetched jardiniers in the array
+    }, (error: any) => {
+      console.error('Error fetching jardiniers:', error);
+    });
+  }
+
   loadClientId(): void {
-    const id = localStorage.getItem('id'); // Assurez-vous que l'ID client est récupéré
+    const id = localStorage.getItem('id'); 
     if (id) {
       this.clientId = Number(id);
     } else {
       console.error('Client ID is null. Unable to create a rendezvous.');
-      this.router.navigate(['/login']); // Rediriger vers la page de connexion
+      this.router.navigate(['/login']); 
     }
   }
 
   checkUserRole(): void {
-    const role = localStorage.getItem('role'); // Supposons que vous stockez le rôle de l'utilisateur dans localStorage
+    const role = localStorage.getItem('role'); 
     if (role === 'ADMIN') {
       this.isAdmin = true;
     } else if (role === 'JARDINIER') {
@@ -81,40 +93,47 @@ export class AddrendezVousComponent implements OnInit {
         this.rendezVousService.getRendezVousById(this.rendezVousId).subscribe(rendezVous => {
           this.rendezVousForm.patchValue(rendezVous);
         });
+      } else if (params['detail']) { // Check for detail mode
+        this.rendezVousId = +params['detail'];
+        this.isDetailMode = true; // Set detail mode
+        this.rendezVousService.getRendezVousById(this.rendezVousId).subscribe(rendezVous => {
+          this.rendezVousForm.patchValue(rendezVous);
+          this.rendezVousForm.disable(); // Disable the form for details view
+        });
       }
     });
   }
 
   onSubmit(): void {
     if (this.rendezVousForm.invalid) {
-      return; // Si la validation du formulaire échoue, on arrête
+      return; 
     }
 
-    // Récupérer la valeur actuelle de 'heure' depuis le formulaire
     let heureValue = this.rendezVousForm.get('heure')?.value;
 
-    // Si la valeur de 'heure' n'inclut pas déjà les secondes, on ajoute ':00'
     if (heureValue && !heureValue.includes(':')) {
       heureValue = `${heureValue}:00`;
     } else if (heureValue && heureValue.split(':').length === 2) {
-      heureValue = `${heureValue}:00`; // ajouter les secondes si elles manquent
+      heureValue = `${heureValue}:00`;
     }
 
-    // Mettre à jour le formulaire avec la valeur modifiée de 'heure'
     this.rendezVousForm.patchValue({ heure: heureValue });
 
-    // Vérifier si l'idClient est bien défini et non null
     if (this.clientId !== null) {
-      const idClient: number = this.clientId; // S'assurer que idClient est un nombre
+      const idClient: number = this.clientId; 
 
-      // Création du nouveau rendez-vous
       this.rendezVousService.createRendezVous(this.rendezVousForm.value, idClient).subscribe(() => {
-        this.router.navigate(['/rendezvous']); // Redirection après la création réussie
+        this.router.navigate(['/rendezvous']); 
       }, (error) => {
         console.error('Erreur lors de la création du rendez-vous :', error);
       });
     } else {
       console.error("Client ID is null. Unable to create a rendezvous.");
     }
+  }
+
+  // New method for navigating back to the list
+  goBackToList(): void {
+    this.router.navigate(['/taches']); // Navigate to the list of taches
   }
 }

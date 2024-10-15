@@ -1,59 +1,31 @@
-<body>
+<main class="main-content">
+  <h2 class="section-title">Task List</h2>
 
-<div class="dashboard-container">
-    <a href="/dashboard" class="logo">Dashboard</a>
+  <div *ngIf="filteredTaches.length > 0" class="task-cards-container">
+    <div *ngFor="let tache of filteredTaches" class="task-card">
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/f21cc014f1e0266ff9a14ca8982330d57cbf65b4cf1b5642919c7bf0ab5ff7ad?placeholderIfAbsent=true&apiKey=750e5d54decc4d3fb4e8170ee0088318" class="task-image">
 
-
-    <main class="content">
-        <div class="tache-list-container">
-            <h2>Task List</h2>
-            <div class="add-tache-button">
-                <a routerLink="/taches/add" class="btn btn-primary">Add New Task</a>
+      <div class="card-content">
+                  <img [src]="tache.imageUrl" [alt]="tache.nom" class="task-image">
+          <div class="card-content">
+            <h3 class="task-title">{{ tache.nom }}</h3>
+            <p class="task-description">{{ tache.description }}</p>
+            <div class="status-section" *ngIf="userRole === 'ADMIN'">
+              <span class="task-status">{{ tache.statutTache }}</span>
             </div>
-
-            <div class="search-container">
-                <input
-                    type="text"
-                    placeholder="Search by description"
-                    [(ngModel)]="searchTerm"
-                    (input)="searchTaches()"
-                    class="form-control"
-                />
-            </div>
-
-            <div *ngIf="taches !== undefined && taches.length > 0">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Nom</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Status</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let tache of filteredTaches">
-                            <td data-label="nom">{{ tache.nom }}</td>
-                            <td data-label="Description">{{ tache.description }}</td>
-                            <td data-label="Date">{{ tache.date | date:'shortDate' }}</td>
-                            <td data-label="Status">{{ tache.statutTache }}</td>
-                            <td data-label="Actions">
-                                <button class="btn btn-danger" (click)="deleteTache(tache.idtache)">Delete</button>
-                                <button class="btn btn-warning" (click)="editTache(tache.idtache)">Edit</button>
-                                <button class="btn btn-warning" (click)="details(tache.idtache)">Details</button>
-                                <a [routerLink]="['/equipements', { idtache: tache.idtache}]">Voir Equipements</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div *ngIf="filteredTaches.length === 0" class="no-tache-container">
-                <p>No tasks available.</p>
-            </div>
+         </div>
+         <div class="cta-section">
+          <button *ngIf="userRole === 'ADMIN'" class="btn btn-danger" (click)="deleteTache(tache.idtache)">Delete</button>
+          <button *ngIf="userRole === 'ADMIN'" class="btn btn-warning" (click)="editTache(tache.idtache)">Edit</button>
+          <button class="btn btn-primary" (click)="details(tache.idtache)">Details</button>
+          <a [routerLink]="['/equipements', { idtache: tache.idtache }]" class="btn btn-link">View Equipment</a>
         </div>
-    </main>
-</div>
+        </div>
+        
+    </div>
+  </div>
 
-</body>
+  <div *ngIf="filteredTaches.length === 0" class="no-tache-container">
+    <p>No tasks available.</p>
+  </div>
+</main>

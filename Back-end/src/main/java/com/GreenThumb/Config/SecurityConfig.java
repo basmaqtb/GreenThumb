@@ -26,10 +26,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/auth/register", "/auth/login").permitAll()
                         .requestMatchers("/rendezvous/**").hasAnyAuthority("ROLE_Client", "ROLE_ADMIN","ROLE_Jardinier")
-                        .requestMatchers("/taches/**").hasAuthority("ROLE_ADMIN")
-                        .requestMatchers("/taches").permitAll()
-                        .requestMatchers("/equipements/**").hasAuthority("ROLE_ADMIN")
+                       .requestMatchers("/taches").permitAll()
                         .requestMatchers("/equipements").permitAll()
+
                         .requestMatchers("/auth/users**").hasAuthority("ROLE_ADMIN")
 
 

@@ -1,57 +1,40 @@
-
-
 <div class="equipement-list-container">
-    <h2>Equipement List</h2>
-    <a href="/dashboard" class="logo">Dashboard</a>
-
-
-    <a routerLink="/taches" class="btn btn-primary">Taches</a>
-    <div class="add-equipement-button">
-      <a routerLink="/equipements/add" class="btn btn-primary">Add New Equipement</a>
-
-    </div>
-
-    <!-- <div class="search-container">
-      <input
-        type="text"
-        placeholder="Search by marque"
-        [(ngModel)]="searchTerm"
-        (input)="searchEquipements()"
-        class="form-control"
-      />
-    </div> -->
-  
-    <div *ngIf="equipements !== undefined && equipements.length > 0">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Type</th>
-            <th scope="col">Marque</th>
-            <th scope="col">Model</th>
-            <th scope="col">Etat</th>
-            <th scope="col">tache Id</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let equipement of filteredEquipements">
-            <td data-label="Type">{{ equipement.type }}</td>
-            <td data-label="Marque">{{ equipement.marque }}</td>
-            <td data-label="modele">{{ equipement.model }}</td>
-            <td data-label="Etat">{{ equipement.etat }}</td>
-            <td data-label="idtache">{{ equipement.idtache }}</td>
-            <td data-label="Actions">
-              <button class="btn btn-danger" (click)="deleteEquipement(equipement.idequipement)">Delete</button>
-              <button class="btn btn-warning" (click)="editEquipement(equipement.idequipement)">Edit</button>
-              
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  
-    <div *ngIf="filteredEquipements.length === 0" class="no-equipement-container">
-      <p>No equipements available.</p>
-    </div>
+  <h2>Equipements</h2>  
+  <!-- Show Add New Equipement button only for admin -->
+  <div class="add-equipement-button" *ngIf="userRole === 'ADMIN'">
+    <a routerLink="/equipements/add" class="btn btn-primary">Add New Equipement</a>
   </div>
-  
+
+  <div *ngIf="equipements !== undefined && equipements.length > 0">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Type</th>
+          <th scope="col">Marque</th>
+          <th scope="col">Model</th>
+          <th scope="col">Etat</th>
+          <!-- <th scope="col">tache Id</th> -->
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let equipement of filteredEquipements">
+          <td data-label="Type">{{ equipement.type }}</td>
+          <td data-label="Marque">{{ equipement.marque }}</td>
+          <td data-label="modele">{{ equipement.model }}</td>
+          <td data-label="Etat">{{ equipement.etat }}</td>
+          <!-- <td data-label="idtache">{{ equipement.idtache }}</td> -->
+          <td data-label="Actions">
+            <!-- Show buttons only for admin -->
+            <button *ngIf="userRole === 'ADMIN'" class="btn btn-danger" (click)="deleteEquipement(equipement.idequipement)">Delete</button>
+            <button *ngIf="userRole === 'ADMIN'" class="btn btn-warning" (click)="editEquipement(equipement.idequipement)">Edit</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="filteredEquipements.length === 0" class="no-equipement-container">
+    <p>No equipements available.</p>
+  </div>
+</div>

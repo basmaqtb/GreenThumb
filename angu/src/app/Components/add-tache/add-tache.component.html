@@ -1,47 +1,57 @@
-<div class="add-tache-container">
-    <h2>{{ isEditMode ? 'Edit Tache' : 'Add Tache' }}</h2>
-    <form [formGroup]="tacheForm" (ngSubmit)="onSubmit()">
+<div class="container">
+  <main class="main-content">
+    <section class="image-section">
+      <!-- <img
+        src="https://cdn.builder.io/api/v1/image/assets/TEMP/a1812c05ca611720726362b4fa3953f4d05c11cca5fa07ebf782a0cc9136e282?placeholderIfAbsent=true&apiKey=750e5d54decc4d3fb4e8170ee0088318"
+        alt="Hydroponic Method Illustration"
+        class="registration-image" /> -->
+    </section>
 
-      <div>
-        <label for="nom">Nom</label>
-        <input id="nom" formControlName="nom" />
-        <div *ngIf="tacheForm.get('nom')?.invalid && tacheForm.get('nom')?.touched">
-          nom is required.
-        </div>
-      </div>
+    <section class="form-section add-tache-container">
+      <h2>{{ isEditMode ? 'Edit Tache' : 'Add Tache' }}</h2>
+      <form class="registration-form" [formGroup]="tacheForm" (ngSubmit)="onSubmit()">
 
-      <div>
-        <label for="description">Description</label>
-        <input id="description" formControlName="description" />
-        <div *ngIf="tacheForm.get('description')?.invalid && tacheForm.get('description')?.touched">
-          Description is required.
+        <div class="form-group">
+          <label for="nom">Nom</label>
+          <input id="nom" formControlName="nom" class="form-control" />
+          <div *ngIf="tacheForm.get('nom')?.invalid && tacheForm.get('nom')?.touched">
+            Nom is required.
+          </div>
         </div>
-      </div>
-  
-      <div>
-        <label for="date">Date</label>
-        <input type="date" id="date" formControlName="date" />
-        <div *ngIf="tacheForm.get('date')?.invalid && tacheForm.get('date')?.touched">
-          Date is required.
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input id="description" formControlName="description" class="form-control" />
+          <div *ngIf="tacheForm.get('description')?.invalid && tacheForm.get('description')?.touched">
+            Description is required.
+          </div>
         </div>
-      </div>
-  
-      <div>
-        <label for="statutTache">Statut Tache</label>
-        <select class="form-control" id="statutTache" formControlName="statutTache" required>
-          <option value="" disabled>Select the status</option>
-          <option value="Traitee">Traitee</option>
-          <option value="NonTraitee">NonTraitee</option>
-          <option value="EnCours">EnCours</option>
-        </select>
-        <div *ngIf="tacheForm.get('statutTache')?.invalid && tacheForm.get('statutTache')?.touched">
-          Statut Tache is required.
+
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input type="date" id="date" formControlName="date" class="form-control" />
+          <div *ngIf="tacheForm.get('date')?.invalid && tacheForm.get('date')?.touched">
+            Date is required.
+          </div>
         </div>
-      </div>
-  
-      
-  
-      <button type="submit" [disabled]="tacheForm.invalid">{{ isEditMode ? 'Update Tache' : 'Add Tache' }}</button>
-    </form>
-  </div>
-  
+
+        <div class="form-group">
+          <label for="statutTache">Select the status</label>
+          <select id="statutTache" formControlName="statutTache" class="form-control">
+            <option value="" disabled>Select the status</option>
+            <option value="Traitee">Traitee</option>
+            <option value="NonTraitee">NonTraitee</option>
+            <option value="EnCours">EnCours</option>
+          </select>
+          <div *ngIf="tacheForm.get('statutTache')?.invalid && tacheForm.get('statutTache')?.touched">
+            Statut Tache is required.
+          </div>
+        </div>
+
+        <button type="submit" class="btn" [disabled]="tacheForm.invalid">
+          {{ isEditMode ? 'Update Tache' : 'Add Tache' }}
+        </button>
+      </form>
+    </section>
+  </main>
+</div>
